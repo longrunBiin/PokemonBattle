@@ -6,7 +6,7 @@ import pokemon.Type;
 public class TypeFactory {
 	Enum<Type> type1;
 	Enum<Type> type2;
-	double compatibility = 1.0;
+	double compatibility = 1;
 
 	public TypeFactory(Enum<Type> type1, Enum<Type> type2) {
 		this.type1 = type1;
