@@ -47,7 +47,7 @@ public class Waitroom extends JFrame {
         inputBox.setBounds(20, 480, 580, 30);
         add(inputBox);
 
-        sendButton = new JButton("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+        sendButton = new JButton("º¸³»±â");
         sendButton.setBounds(620, 480, 110, 30);
         sendButton.setBackground(Color.YELLOW);
         sendButton.setFocusPainted(false);

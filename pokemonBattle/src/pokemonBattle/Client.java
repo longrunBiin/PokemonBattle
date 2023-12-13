@@ -33,10 +33,10 @@ public class Client {
         Point location = loginFrame.getLocation();
         loginFrame.setVisible(false);
 
-        waitroom = new Waitroom("ï¿½ï¿½ï¿½ï¿½ (User1)");
+        waitroom = new Waitroom("´ë±â½Ç (User1)");
         waitroom.setLocation(location);
         waitroom.getSendButton().addActionListener(e -> sendMessage());
-        String username = JOptionPane.showInputDialog("ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½:");
+        String username = JOptionPane.showInputDialog("À¯Àú ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä:");
 
         startClient(username);
     }
@@ -44,7 +44,7 @@ public class Client {
     private void startClient(String username) {
         try {
             Socket socket = new Socket("localhost", 9999);
-            waitroom.appendText(username + "ï¿½ï¿½ï¿½Ó¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½..\n\n");
+            waitroom.appendText(username + "°ÔÀÓ¿¡ Á¢¼ÓÇÏ¿´½À´Ï´Ù..\n\n");
 
             out = new PrintWriter(socket.getOutputStream(), true);
             out.println(username);
@@ -64,7 +64,7 @@ public class Client {
                 @Override
                 protected void process(List<String> chunks) {
                     for (String message : chunks) {
-                        waitroom.appendText("ï¿½ï¿½ï¿½ï¿½: " + message + "\n");
+                        waitroom.appendText("»ó´ë¹æ: " + message + "\n");
                     }
                 }
             };
@@ -78,7 +78,7 @@ public class Client {
     private void sendMessage() {
         String message = waitroom.getInputBox().getText();
         if (!message.isEmpty()) {
-            waitroom.appendText("ï¿½ï¿½: " + message + "\n");
+            waitroom.appendText("³ª: " + message + "\n");
             out.println(message);
             waitroom.getInputBox().setText("");
         }

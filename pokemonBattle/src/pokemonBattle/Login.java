@@ -12,38 +12,38 @@ public class Login extends JFrame {
         setTitle(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        
         String imagePath = "/image/login.png";
         URL iconURL = getClass().getResource(imagePath);
         if (iconURL == null) {
-            // ì´ë¯¸ì§€ë¥¼ ì°¾ì„ ìˆ˜ ì—†ëŠ” ê²½ìš° ì²˜ë¦¬í•©ë‹ˆë‹¤.
-            System.err.println("ì˜¤ë¥˜: ì´ë¯¸ì§€ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.: " + imagePath);
+            // 
+            System.err.println("¿À·ù.: " + imagePath);
             return;
         }
         ImageIcon backgroundIcon = new ImageIcon(iconURL);
         Image image = backgroundIcon.getImage().getScaledInstance(750, 550, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(image);
 
-        //ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Ð³ï¿½
+        
         JPanel loginPanel = new JPanel(new BorderLayout());
         loginPanel.setOpaque(false);
 
         
-        //ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½Æ°
-        JButton startButton = new JButton("ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½");
+        
+        JButton startButton = new JButton("½ÃÀÛÇÏ±â");
         startButton.setFont(new Font("Arial Black", Font.BOLD, 20));
         startButton.setForeground(Color.WHITE);
         startButton.setBackground(Color.RED);
         startButton.setFocusPainted(false);
         startButton.addActionListener(e -> onStartChat.run());
         
-        startButton.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 20));
+        startButton.setFont(new Font("±¼¸²", Font.BOLD, 20));
         startButton.setFocusPainted(false);
 
-        // ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+        
         JLabel backgroundLabel = new JLabel(scaledIcon);
 
-        //ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Ð³ï¿½ ï¿½ï¿½Ä¡
+        
         JPanel panel = new JPanel(new BorderLayout());
         
         panel.add(startButton, BorderLayout.SOUTH);
@@ -64,8 +64,8 @@ public class Login extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             Login frame = new Login("Login", () -> {
-                System.out.println("ï¿½ï¿½ï¿½Ó¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½..");             
-                SwingUtilities.invokeLater(() -> new Waitroom("ï¿½ï¿½ï¿½ï¿½"));
+                System.out.println("°ÔÀÓ¿¡ Á¢¼ÓÇÕ´Ï´Ù..");             
+                SwingUtilities.invokeLater(() -> new Waitroom("´ë±â½Ç"));
             });
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);

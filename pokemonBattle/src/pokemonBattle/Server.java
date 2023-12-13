@@ -10,11 +10,11 @@ public class Server {
     public static void main(String[] args) {
         try {
             ServerSocket serverSocket = new ServerSocket(9999);
-            System.out.println("ì„œë²„ ì‹¤í–‰ ì¤‘...");
+            System.out.println("¼­¹ö ½ÇÇà Áß...");
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                System.out.println("í´ë¼ì´ì–¸íŠ¸ ì ‘ì†ë¨");
+                System.out.println("Å¬¶óÀÌ¾ğÆ® Á¢¼ÓµÊ");
 
                 ClientHandler client = new ClientHandler(clientSocket);
                 clients.add(client);
@@ -41,7 +41,7 @@ public class Server {
                 
                 
                 clientName = reader.readLine();
-                System.out.println("í´ë¼ì´ì–¸íŠ¸ [" + clientName + "] ì ‘ì†ë¨");
+                System.out.println("Å¬¶óÀÌ¾ğÆ® [" + clientName + "] Á¢¼ÓµÊ");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -54,11 +54,11 @@ public class Server {
                     if (message == null) {
                         break;
                     }
-                    System.out.println("í´ë¼ì´ì–¸íŠ¸ [" + clientName + "] ë©”ì‹œì§€: " + message);
+                    System.out.println("Å¬¶óÀÌ¾ğÆ® [" + clientName + "] ¸Ş½ÃÁö :" + message);
                     sendToAll(message);
                 }
             } catch (IOException e) {
-            	System.out.println("í´ë¼ì´ì–¸íŠ¸ [" + clientName + "] ì—°ê²°ì´ ëŠì–´ì¡ŒìŠµë‹ˆë‹¤.");
+            	System.out.println("Å¬¶óÀÌ¾ğÆ® [" + clientName + "] ¿¬°áÀÌ ²÷¾îÁ³½À´Ï´Ù.");
                 
                 e.printStackTrace();
             }
