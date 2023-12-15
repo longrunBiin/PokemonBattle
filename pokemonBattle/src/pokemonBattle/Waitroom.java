@@ -10,11 +10,25 @@ public class Waitroom extends JFrame {
     private JTextField inputBox;
     private JButton sendButton;
     private JScrollPane scrollPane;
+    private JPanel contentPane;
+    
+    public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Waitroom frame = new Waitroom("test");
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
     public Waitroom(String title) {
-        setTitle(title);
+    	setTitle(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null);
+        getContentPane().setLayout(null);
         int frameWidth = 760;
         int frameHeight = 560;
         setSize(frameWidth, frameHeight);
@@ -29,29 +43,35 @@ public class Waitroom extends JFrame {
 
         JLabel imageLabel = new JLabel(scaledIcon);
         imageLabel.setBounds(0, 0, frameWidth, 365);
-        add(imageLabel);
+        getContentPane().add(imageLabel);
 
         textArea = new JTextArea();
         textArea.setEditable(false);
         textArea.setBackground(new Color(1, 49, 100));
         textArea.setForeground(Color.WHITE);
         scrollPane = new JScrollPane(textArea);
-        scrollPane.setBounds(20, 370, 710, 100);
+        scrollPane.setBounds(20, 370, 580, 100);
         scrollPane.setBorder(new LineBorder(Color.YELLOW, 3));
-        add(scrollPane);
+        getContentPane().add(scrollPane);
 
         inputBox = new JTextField();
         inputBox.setBackground(new Color(1, 49, 100));
         inputBox.setForeground(Color.WHITE);
         inputBox.setBorder(new LineBorder(Color.YELLOW, 3));
         inputBox.setBounds(20, 480, 580, 30);
-        add(inputBox);
+        getContentPane().add(inputBox);
 
         sendButton = new JButton("º¸³»±â");
         sendButton.setBounds(620, 480, 110, 30);
         sendButton.setBackground(Color.YELLOW);
         sendButton.setFocusPainted(false);
-        add(sendButton);
+        getContentPane().add(sendButton);
+        
+        JButton readyBtn = new JButton("READY");
+        readyBtn.setBackground(Color.WHITE);
+        readyBtn.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 14));
+        readyBtn.setBounds(620, 370, 110, 100);
+        getContentPane().add(readyBtn);
 
         setVisible(true);
     }

@@ -85,7 +85,7 @@ public class Client {
     }
 
     public static void main(String[] args) {
-//        SwingUtilities.invokeLater(Client::new);
+        SwingUtilities.invokeLater(Client::new);
         Pokemon poke2 = new Pikachu();
 		Pokemon poke = new Charizard();
 		
