@@ -30,5 +30,8 @@ public abstract class Pokemon {
     public int getSkillDamage() {
     	return skills.get(0).getDamage();
     }
+    public Enum<Type> getType() {
+    	return model.type;
+    }
 }
 

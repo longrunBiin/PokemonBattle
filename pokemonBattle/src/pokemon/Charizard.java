@@ -12,7 +12,7 @@ import skills.ThunderBolt;
 public class Charizard extends Pokemon{
 	
 	public Charizard() {
-		model = new PokemonModel("charizard", 100, Type.FIRE, skills, "", 50, 50);
+		model = new PokemonModel("charizard", 100, Type.FIRE, skills, "", 50, 100);
 	}
 
 	@Override

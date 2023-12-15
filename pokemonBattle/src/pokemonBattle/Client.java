@@ -85,23 +85,23 @@ public class Client {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(Client::new);
-        Pokemon poke = new Pikachu();
-		Pokemon poke2 = new Charizard();
+//        SwingUtilities.invokeLater(Client::new);
+        Pokemon poke2 = new Pikachu();
+		Pokemon poke = new Charizard();
 		
 		Player player1 = new Player(poke);
 		Player player2 = new Player(poke2);
 		
-		player1.useSkill("1");
-		player2.useSkill("1");
+//		player1.useSkill("1");
+//		player2.useSkill("1");
+//		
+//		poke.useSkill("1");
+//		poke2.useSkill("1");
+//		poke.useSkill("2");
+//		poke2.useSkill("2");
 		
-		poke.useSkill("1");
-		poke2.useSkill("1");
-		poke.useSkill("2");
-		poke2.useSkill("2");
+		GameLogic logic = new GameLogic(poke, poke2);
 		
-		GameLogic logic = new GameLogic(poke);
-		
-		System.out.println(logic.calculateDamage(poke));
+		System.out.println(logic.calculateDamage(poke, poke2));
     }
 }

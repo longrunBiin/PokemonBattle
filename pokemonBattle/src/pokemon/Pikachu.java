@@ -10,7 +10,7 @@ import skills.ThunderBolt;
 public class Pikachu extends Pokemon{
 	
 	public Pikachu() {
-		model = new PokemonModel("pikachu", 100, Type.ELECTRIC, skills, "", 50, 50);
+		model = new PokemonModel("pikachu", 100, Type.ELECTRIC, skills, "", 150, 50);
 	}
 
 	@Override
