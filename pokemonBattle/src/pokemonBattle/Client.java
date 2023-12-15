@@ -100,8 +100,8 @@ public class Client {
 //		poke.useSkill("2");
 //		poke2.useSkill("2");
 		
-		GameLogic logic = new GameLogic(poke, poke2);
+		//GameLogic logic = new GameLogic(poke, poke2);
 		
-		System.out.println(logic.calculateDamage(poke, poke2));
+		//System.out.println(logic.calculateDamage(poke, poke2));
     }
 }
