@@ -70,13 +70,13 @@ public class Waitroom extends JFrame {
         inputBox.setBounds(20, 480, 580, 30);
         getContentPane().add(inputBox);
 
-        sendButton = new JButton("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+        sendButton = new JButton("º¸³»±â");
         sendButton.setBounds(620, 480, 110, 30);
         sendButton.setBackground(Color.YELLOW);
         sendButton.setFocusPainted(false);
         getContentPane().add(sendButton);
         
-        //ï¿½Øºï¿½ ï¿½ï¿½Æ°
+        //ÁØºñ ¹öÆ°
         JButton readyBtn = new JButton("READY");
         readyBtn.setBackground(Color.WHITE);
         readyBtn.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 14));
@@ -112,19 +112,20 @@ public class Waitroom extends JFrame {
     }
     
     public void processServerMessage(String message) {
-//        if (message.startsWith("READY_STATUS:")) {
-//            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Øºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ş½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
-//            String[] parts = message.split(":");
-//            String playerID = parts[1];
-//            boolean isReady = Boolean.parseBoolean(parts[2]);
-//            // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ IDï¿½ï¿½ ï¿½Øºï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ È­ï¿½é¿¡ Ç¥ï¿½ï¿½
-//            appendText(playerID + (isReady ? " ï¿½Øºï¿½ ï¿½Ï·ï¿½\n" : " ï¿½Øºï¿½ ï¿½ï¿½ï¿½\n"));
-//        } else if (message.equals("GAME_START")) {
-//            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
-//            EventQueue.invokeLater(() -> {
-//                Selectroom selectRoom = new Selectroom();
-//                selectRoom.setVisible(true);
-//            });
+//      if (message.startsWith("READY_STATUS:")) {
+//      // ¼­¹ö¿¡¼­ º¸³½ ÁØºñ »óÅÂ ¸Ş½ÃÁö Ã³¸®
+//      String[] parts = message.split(":");
+//      String playerID = parts[1];
+//      boolean isReady = Boolean.parseBoolean(parts[2]);
+//      // ÇÃ·¹ÀÌ¾î ID¿Í ÁØºñ »óÅÂ¸¦ È­¸é¿¡ Ç¥½Ã
+//      appendText(playerID + (isReady ? " ÁØºñ ¿Ï·á\n" : " ÁØºñ Ãë¼Ò\n"));
+//  } else if (message.equals("GAME_START")) {
+//      // °ÔÀÓ ½ÃÀÛ Ã³¸®
+//      EventQueue.invokeLater(() -> {
+//          Selectroom selectRoom = new Selectroom();
+//          selectRoom.setVisible(true);
+//      });
+
     
     	if (message.equals("GAME_START")) {
             EventQueue.invokeLater(() -> {
@@ -133,8 +134,9 @@ public class Waitroom extends JFrame {
                 this.setVisible(false);
             });
         } else {
-            // ï¿½Ù¸ï¿½ ï¿½Ş½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
-        	//appendText("ìƒëŒ€ë°©: " + message + "\n");
+        	// ´Ù¸¥ ¸Ş½ÃÁö Ã³¸®
+            appendText("»ó´ë¹æ: " + message + "\n");
+
         }
         }
         }
