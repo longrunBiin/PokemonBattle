@@ -10,9 +10,9 @@ import skills.Skills;
 import skills.ThunderBolt;
 import type.Type;
 
-public class Charizard extends Pokemon{
+public class Charmander extends Pokemon{//파이리 
 	
-	public Charizard() {
+	public Charmander() {
 		model = new PokemonModel("charizard", 100, Type.FIRE, skills, "", 50, 100);
 	}
 

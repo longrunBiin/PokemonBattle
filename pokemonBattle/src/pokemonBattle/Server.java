@@ -8,18 +8,18 @@ import javax.swing.SwingWorker;
 
 public class Server {
     private static List<ClientHandler> clients = new ArrayList<>();
-    private static int clientIDCounter = 0; // °íÀ¯ ID Ä«¿îÅÍ
+    private static int clientIDCounter = 0; // ï¿½ï¿½ï¿½ï¿½ ID Ä«ï¿½ï¿½ï¿½ï¿½
 
     public static void main(String[] args) {
         try {
             ServerSocket serverSocket = new ServerSocket(9999);
-            System.out.println("¼­¹ö ½ÇÇà Áß...");
+            System.out.println("ì„œë²„ ì‹¤í–‰ì¤‘...");
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                System.out.println("Å¬¶óÀÌ¾ðÆ® Á¢¼ÓµÊ");
+                System.out.println("í´ë¼ì´ì–¸íŠ¸ ì ‘ì†ë¨");
 
-                String clientID = "Client" + (++clientIDCounter); // °íÀ¯ ID »ý¼º
+                String clientID = "Client" + (++clientIDCounter); // ï¿½ï¿½ï¿½ï¿½ ID ï¿½ï¿½ï¿½ï¿½
                 ClientHandler client = new ClientHandler(clientSocket, clientID);
                 clients.add(client);
 
@@ -36,9 +36,9 @@ public class Server {
         private BufferedReader reader;
         private PrintWriter writer;
         private String clientName;
-        private String clientID; // Å¬¶óÀÌ¾ðÆ® °íÀ¯ ID
-
-        private boolean isReady = false; //ÁØºñ »óÅÂ ÃßÀû
+        private String clientID; // Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ID
+        private boolean isReady = false; //ï¿½Øºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        private boolean battleIsReady = false;
 
         public ClientHandler(Socket socket, String clientID) {
         	this.clientID = clientID;
@@ -47,10 +47,10 @@ public class Server {
                 reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 writer = new PrintWriter(clientSocket.getOutputStream(), true);
                 
-                writer.println("ID:" + clientID); // Å¬¶óÀÌ¾ðÆ®¿¡ ID Àü¼Û
+                writer.println("ID:" + clientID); // Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ ID ï¿½ï¿½ï¿½ï¿½
                               
                 clientName = reader.readLine();
-                System.out.println("Å¬¶óÀÌ¾ðÆ® [" + clientName + "]  Á¢¼ÓµÊ");
+                System.out.println("í´ë¼ì´ì–¸íŠ¸ [" + clientName + "] ì ‘ì†ë¨");
                
                 
                 
@@ -69,7 +69,7 @@ public class Server {
                     }
                     
                    
-                    System.out.println("Å¬¶óÀÌ¾ðÆ® [" + clientName + "] ¸Þ½ÃÁö : " + message);
+                    System.out.println("í´ë¼ì´ì–¸íŠ¸ [" + clientName + "] ë©”ì‹œì§€ : " + message);
                     sendToAll(message);
                     
                     if (message.startsWith("READY:")) {
@@ -78,11 +78,22 @@ public class Server {
                             isReady = !isReady;
                             checkAllReady();
                         }
+                        sendToAll(message);
+                    }
+                    else if (message.startsWith("BATTLE:")) {
+                        String clientId = message.split(":")[1];
+                        if (clientId.equals(this.clientID)) {
+                            battleIsReady = !battleIsReady;
+                            checkBattleReady();
+                        }
+                        sendToAll(message);
+                    }
                       
-                    sendToAll(message);
-                    }}
+                    
+                    
+                  }
                 } catch (IOException e) {
-                    System.out.println("Å¬¶óÀÌ¾ðÆ® [" + clientName + "] ¿¬°áÀÌ ²÷¾îÁ³½À´Ï´Ù.");
+                    System.out.println("í´ë¼ì´ì–¸íŠ¸ [" + clientName + "] ì—°ê²°ì´ ëŠì–´ì¡ŒìŠµë‹ˆë‹¤.");
                     e.printStackTrace();
                     
                 }
@@ -90,12 +101,22 @@ public class Server {
         }
         
         private void checkAllReady() {
-            // ¸ðµç Å¬¶óÀÌ¾ðÆ®°¡ ÁØºñµÇ¾ú´ÂÁö È®ÀÎÇÏ´Â ·ÎÁ÷
+            // ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ ï¿½Øºï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½
             boolean allReady = clients.stream().allMatch(client -> client.isReady);
             if (allReady) {
-                // ¸ðµç Å¬¶óÀÌ¾ðÆ®¿¡°Ô °ÔÀÓ ½ÃÀÛ ¸Þ½ÃÁö º¸³»±â
+                // ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 for (ClientHandler client : clients) {
                     client.sendMessage("GAME_START");
+                }             
+            }
+        }
+        private void checkBattleReady() {
+            // ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ ï¿½Øºï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½
+            boolean allReady = clients.stream().allMatch(client -> client.battleIsReady);
+            if (allReady) {
+                // ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                for (ClientHandler client : clients) {
+                    client.sendMessage("BATTLE_START");
                 }             
             }
         }

@@ -1,3 +1,4 @@
+
 package pokemonBattle;
 
 import javax.swing.*;
@@ -22,48 +23,48 @@ public class PokemonBattleGUI extends JFrame {
     }
 
     public PokemonBattleGUI() {
-        setTitle("Æ÷ÄÏ¸ó ¹èÆ²");
+        setTitle("ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½Æ²");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        // Æ÷ÄÏ¸ó ÀÌ¹ÌÁö
+        // ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
         //player1PokemonImageLabel = new JLabel(new ImageIcon("/image/login.png"));
-        // ÀÌ¹ÌÁö ¿¹½Ã
+        // ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         player1PokemonImageLabel = new JLabel(new ImageIcon(getClass().getResource("/image/waitroom.png")));
-        player1PokemonImageLabel.setBounds(10, 119, 258, 232); // À§Ä¡¿Í Å©±â Á¶Á¤
+        player1PokemonImageLabel.setBounds(10, 119, 258, 232); // ï¿½ï¿½Ä¡ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         getContentPane().add(player1PokemonImageLabel);
 
         //player2PokemonImageLabel = new JLabel(new ImageIcon("/image/Waitroom.png"));
         player2PokemonImageLabel = new JLabel(new ImageIcon(getClass().getResource("/image/login.png")));
-        player2PokemonImageLabel.setBounds(520, 10, 258, 232); // À§Ä¡¿Í Å©±â Á¶Á¤
+        player2PokemonImageLabel.setBounds(520, 10, 258, 232); // ï¿½ï¿½Ä¡ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         getContentPane().add(player2PokemonImageLabel);
 
-        // HP ¹Ù
+        // HP ï¿½ï¿½
         player1HPBar = new JProgressBar(0, 100);
-        player1HPBar.setValue(100); // ¿¹½Ã HP
-        player1HPBar.setBounds(318, 291, 200, 20); // À§Ä¡¿Í Å©±â Á¶Á¤
+        player1HPBar.setValue(100); // ï¿½ï¿½ï¿½ï¿½ HP
+        player1HPBar.setBounds(318, 291, 200, 20); // ï¿½ï¿½Ä¡ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         getContentPane().add(player1HPBar);
 
         player2HPBar = new JProgressBar(0, 100);
-        player2HPBar.setValue(100); // ¿¹½Ã HP
-        player2HPBar.setBounds(284, 10, 200, 20); // À§Ä¡¿Í Å©±â Á¶Á¤
+        player2HPBar.setValue(100); // ï¿½ï¿½ï¿½ï¿½ HP
+        player2HPBar.setBounds(284, 10, 200, 20); // ï¿½ï¿½Ä¡ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         getContentPane().add(player2HPBar);
 
-        // HP ·¹ÀÌºí
+        // HP ï¿½ï¿½ï¿½Ìºï¿½
         player1PokemonHP = new JLabel("100 / 100");
-        player1PokemonHP.setBounds(318, 310, 200, 20); // À§Ä¡¿Í Å©±â Á¶Á¤
+        player1PokemonHP.setBounds(318, 310, 200, 20); // ï¿½ï¿½Ä¡ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         getContentPane().add(player1PokemonHP);
 
         player2PokemonHP = new JLabel("100 / 100");
-        player2PokemonHP.setBounds(284, 26, 200, 20); // À§Ä¡¿Í Å©±â Á¶Á¤
+        player2PokemonHP.setBounds(284, 26, 200, 20); // ï¿½ï¿½Ä¡ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         getContentPane().add(player2PokemonHP);
 
-        // ¹èÆ² ·Î±×
+        // ï¿½ï¿½Æ² ï¿½Î±ï¿½
         battleLog = new JTextArea();
         battleLog.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(battleLog);
-        scrollPane.setBounds(318, 365, 472, 200); // À§Ä¡¿Í Å©±â Á¶Á¤
+        scrollPane.setBounds(318, 365, 472, 200); // ï¿½ï¿½Ä¡ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         getContentPane().add(scrollPane);
         
         JPanel panel = new JPanel();
@@ -87,6 +88,6 @@ public class PokemonBattleGUI extends JFrame {
         skill4.setBounds(161, 105, 127, 85);
         panel.add(skill4);
 
-        // ÀÌº¥Æ® ¸®½º³Ê ¹× °ÔÀÓ ·ÎÁ÷Àº
+        // ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     }
 }
