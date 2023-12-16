@@ -8,7 +8,7 @@ import javax.swing.SwingWorker;
 
 public class Server {
     private static List<ClientHandler> clients = new ArrayList<>();
-    private static int clientIDCounter = 0; // ���� ID ī����
+    private static int clientIDCounter = 0; // 고유 ID 카운터
 
     public static void main(String[] args) {
         try {
@@ -19,7 +19,7 @@ public class Server {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("클라이언트 접속됨");
 
-                String clientID = "Client" + (++clientIDCounter); // ���� ID ����
+                String clientID = "Client" + (++clientIDCounter); // 고유 ID 생성
                 ClientHandler client = new ClientHandler(clientSocket, clientID);
                 clients.add(client);
 
@@ -36,8 +36,8 @@ public class Server {
         private BufferedReader reader;
         private PrintWriter writer;
         private String clientName;
-        private String clientID; // Ŭ���̾�Ʈ ���� ID
-        private boolean isReady = false; //�غ� ���� ����
+        private String clientID; // 클라이언트 고유 ID
+        private boolean isReady = false; //준비 상태 추적
         private boolean battleIsReady = false;
 
         public ClientHandler(Socket socket, String clientID) {
@@ -47,8 +47,7 @@ public class Server {
                 reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 writer = new PrintWriter(clientSocket.getOutputStream(), true);
                 
-                writer.println("ID:" + clientID); // Ŭ���̾�Ʈ�� ID ����
-                              
+                writer.println("ID:" + clientID); // 클라이언트에 ID 전송                              
                 clientName = reader.readLine();
                 System.out.println("클라이언트 [" + clientName + "] 접속됨");
                
@@ -101,20 +100,20 @@ public class Server {
         }
         
         private void checkAllReady() {
-            // ��� Ŭ���̾�Ʈ�� �غ�Ǿ����� Ȯ���ϴ� ����
-            boolean allReady = clients.stream().allMatch(client -> client.isReady);
+        	// 모든 클라이언트가 준비되었는지 확인하는 로직
+        	boolean allReady = clients.stream().allMatch(client -> client.isReady);
             if (allReady) {
-                // ��� Ŭ���̾�Ʈ���� ���� ���� �޽��� ������
+            	// 모든 클라이언트에게 게임 시작 메시지 보내기
                 for (ClientHandler client : clients) {
                     client.sendMessage("GAME_START");
                 }             
             }
         }
         private void checkBattleReady() {
-            // ��� Ŭ���̾�Ʈ�� �غ�Ǿ����� Ȯ���ϴ� ����
+        	// 모든 클라이언트가 준비되었는지 확인하는 로직
             boolean allReady = clients.stream().allMatch(client -> client.battleIsReady);
             if (allReady) {
-                // ��� Ŭ���̾�Ʈ���� ���� ���� �޽��� ������
+            	// 모든 클라이언트에게 게임 시작 메시지 보내기
                 for (ClientHandler client : clients) {
                     client.sendMessage("BATTLE_START");
                 }             

@@ -23,48 +23,48 @@ public class PokemonBattleGUI extends JFrame {
     }
 
     public PokemonBattleGUI() {
-        setTitle("���ϸ� ��Ʋ");
+        setTitle("포켓몬 배틀");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        // ���ϸ� �̹���
+        // 포켓몬 이미지
         //player1PokemonImageLabel = new JLabel(new ImageIcon("/image/login.png"));
-        // �̹��� ����
+        // 이미지 예시
         player1PokemonImageLabel = new JLabel(new ImageIcon(getClass().getResource("/image/waitroom.png")));
-        player1PokemonImageLabel.setBounds(10, 119, 258, 232); // ��ġ�� ũ�� ����
+        player1PokemonImageLabel.setBounds(10, 119, 258, 232); // 위치와 크기 조정
         getContentPane().add(player1PokemonImageLabel);
 
         //player2PokemonImageLabel = new JLabel(new ImageIcon("/image/Waitroom.png"));
         player2PokemonImageLabel = new JLabel(new ImageIcon(getClass().getResource("/image/login.png")));
-        player2PokemonImageLabel.setBounds(520, 10, 258, 232); // ��ġ�� ũ�� ����
+        player2PokemonImageLabel.setBounds(520, 10, 258, 232); // 위치와 크기 조정
         getContentPane().add(player2PokemonImageLabel);
 
-        // HP ��
+        // HP 바 
         player1HPBar = new JProgressBar(0, 100);
-        player1HPBar.setValue(100); // ���� HP
-        player1HPBar.setBounds(318, 291, 200, 20); // ��ġ�� ũ�� ����
+        player1HPBar.setValue(100); // 예시 HP
+        player1HPBar.setBounds(318, 291, 200, 20); // 위치와 크기 조정
         getContentPane().add(player1HPBar);
 
         player2HPBar = new JProgressBar(0, 100);
-        player2HPBar.setValue(100); // ���� HP
-        player2HPBar.setBounds(284, 10, 200, 20); // ��ġ�� ũ�� ����
+        player2HPBar.setValue(100); // 예시 HP
+        player2HPBar.setBounds(284, 10, 200, 20); // 위치와 크기 조정
         getContentPane().add(player2HPBar);
 
-        // HP ���̺�
+        // HP 레이블
         player1PokemonHP = new JLabel("100 / 100");
-        player1PokemonHP.setBounds(318, 310, 200, 20); // ��ġ�� ũ�� ����
+        player1PokemonHP.setBounds(318, 310, 200, 20); // 위치와 크기 조정
         getContentPane().add(player1PokemonHP);
 
         player2PokemonHP = new JLabel("100 / 100");
-        player2PokemonHP.setBounds(284, 26, 200, 20); // ��ġ�� ũ�� ����
+        player2PokemonHP.setBounds(284, 26, 200, 20); // 위치와 크기 조정
         getContentPane().add(player2PokemonHP);
 
-        // ��Ʋ �α�
+        // 배틀 로그
         battleLog = new JTextArea();
         battleLog.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(battleLog);
-        scrollPane.setBounds(318, 365, 472, 200); // ��ġ�� ũ�� ����
+        scrollPane.setBounds(318, 365, 472, 200); // 위치와 크기 조정
         getContentPane().add(scrollPane);
         
         JPanel panel = new JPanel();
@@ -88,6 +88,6 @@ public class PokemonBattleGUI extends JFrame {
         skill4.setBounds(161, 105, 127, 85);
         panel.add(skill4);
 
-        // �̺�Ʈ ������ �� ���� ������
-    }
+        // 이벤트 리스너 및 게임 로직은
+        }
 }

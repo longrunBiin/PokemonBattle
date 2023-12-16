@@ -82,7 +82,7 @@ public class Client {
     }
         
     public void sendReadyStatus() {
-    	out.println("READY:" + thisPlayerID); //������ �غ� ����
+    	out.println("READY:" + thisPlayerID); //서버에 준비 전송
     }
     public void sendBattleReadyStatus() {
     	out.println("BATTLE:" + thisPlayerID); //배틀 준비 완료 시 전송 
