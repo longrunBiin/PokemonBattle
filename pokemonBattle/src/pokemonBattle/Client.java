@@ -11,6 +11,7 @@ import pokemon.Charizard;
 import pokemon.Pikachu;
 import pokemon.Pokemon;
 
+import java.awt.EventQueue;
 import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -57,9 +58,9 @@ public class Client {
                 protected Void doInBackground() throws Exception {
                     String message;
                     while ((message = in.readLine()) != null) {
-//                        if (message.startsWith("ID:")) {
-//                            thisPlayerID = message.substring(3);
-//                        }
+                        if (message.startsWith("ID:")) {
+                            thisPlayerID = message.substring(3);
+                        }
                         publish(message);
                 }
                     return null;
@@ -69,6 +70,7 @@ public class Client {
                 protected void process(List<String> chunks) {
                     for (String message : chunks) {
                         waitroom.appendText("상대방: " + message + "\n");
+                        processServerMessage(message);
                     }
                 }
             };
@@ -83,6 +85,21 @@ public class Client {
     	out.println("READY:" + thisPlayerID); //서버에 준비 전송
     }
     
+    public void processServerMessage(String message) {
+        System.out.println("Received message: " + message); // 로그 출력
+
+        if (message.equals("GAME_START")) {
+            // 게임 시작 처리
+            EventQueue.invokeLater(() -> {
+                Selectroom selectRoom = new Selectroom();
+                selectRoom.setVisible(true);
+                waitroom.setVisible(false);
+            });
+        } else {
+            // 다른 메시지 처리
+            //appendText("상대방: " + message + "\n");
+        }
+    }
     
     private void sendMessage() {
         String message = waitroom.getInputBox().getText();
