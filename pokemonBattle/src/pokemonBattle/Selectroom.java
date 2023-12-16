@@ -63,8 +63,8 @@ public class Selectroom extends JFrame {
 		btnNewButton_2.setBounds(260, 350, 149, 57);
 		contentPane.add(btnNewButton_2);
 		
-		JButton btnNewButton_1_1 = new JButton("POKEMON2");
-		btnNewButton_1_1.setBounds(488, 69, 190, 210);
-		contentPane.add(btnNewButton_1_1);
+		JButton btnNewButton_3 = new JButton("POKEMON3");
+		btnNewButton_3.setBounds(488, 69, 190, 210);
+		contentPane.add(btnNewButton_3);
 	}
 }
