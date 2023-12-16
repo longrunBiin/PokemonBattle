@@ -40,7 +40,7 @@ public class Selectroom extends JFrame {
 	 */
 	public Selectroom() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 700, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -48,11 +48,11 @@ public class Selectroom extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnNewButton = new JButton("POKEMON1");
-		btnNewButton.setBounds(23, 20, 129, 130);
+		btnNewButton.setBounds(10, 69, 190, 210);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("POKEMON2");
-		btnNewButton_1.setBounds(162, 20, 129, 130);
+		btnNewButton_1.setBounds(247, 69, 190, 210);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("READY");
@@ -60,7 +60,11 @@ public class Selectroom extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_2.setBounds(158, 211, 93, 23);
+		btnNewButton_2.setBounds(260, 350, 149, 57);
 		contentPane.add(btnNewButton_2);
+		
+		JButton btnNewButton_1_1 = new JButton("POKEMON2");
+		btnNewButton_1_1.setBounds(488, 69, 190, 210);
+		contentPane.add(btnNewButton_1_1);
 	}
 }
