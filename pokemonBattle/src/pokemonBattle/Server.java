@@ -4,8 +4,11 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
+import javax.swing.SwingWorker;
+
 public class Server {
     private static List<ClientHandler> clients = new ArrayList<>();
+    private static int clientIDCounter = 0; // 고유 ID 카운터
 
     public static void main(String[] args) {
         try {
@@ -16,7 +19,8 @@ public class Server {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("클라이언트 접속됨");
 
-                ClientHandler client = new ClientHandler(clientSocket);
+                String clientID = "Client" + (++clientIDCounter); // 고유 ID 생성
+                ClientHandler client = new ClientHandler(clientSocket, clientID);
                 clients.add(client);
 
                 Thread clientThread = new Thread(client);
@@ -32,16 +36,24 @@ public class Server {
         private BufferedReader reader;
         private PrintWriter writer;
         private String clientName;
+        private String clientID; // 클라이언트 고유 ID
+        private boolean isReady = false; //준비 상태 추적
 
-        public ClientHandler(Socket socket) {
+        public ClientHandler(Socket socket, String clientID) {
+        	this.clientID = clientID;
             try {
                 this.clientSocket = socket;
                 reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 writer = new PrintWriter(clientSocket.getOutputStream(), true);
                 
-                
+                writer.println("ID:" + clientID); // 클라이언트에 ID 전송
+                              
                 clientName = reader.readLine();
                 System.out.println("클라이언트 [" + clientName + "] 접속됨");
+               
+                
+                
+                
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -54,13 +66,36 @@ public class Server {
                     if (message == null) {
                         break;
                     }
+                    
+                   
                     System.out.println("클라이언트 [" + clientName + "] 메시지 :" + message);
                     sendToAll(message);
+                    
+                    if (message.startsWith("READY:")) {
+                        String clientId = message.split(":")[1];
+                        if (clientId.equals(this.clientID)) {
+                            isReady = !isReady;
+                            checkAllReady();
+                        }
+                      
+                    sendToAll(message);
+                    }}
+                } catch (IOException e) {
+                    System.out.println("클라이언트 [" + clientName + "] 연결이 끊어졌습니다.");
+                    e.printStackTrace();
+                    
                 }
-            } catch (IOException e) {
-            	System.out.println("클라이언트 [" + clientName + "] 연결이 끊어졌습니다.");
-                
-                e.printStackTrace();
+            
+        }
+        
+        private void checkAllReady() {
+            // 모든 클라이언트가 준비되었는지 확인하는 로직
+            boolean allReady = clients.stream().allMatch(client -> client.isReady);
+            if (allReady) {
+                // 모든 클라이언트에게 게임 시작 메시지 보내기
+                for (ClientHandler client : clients) {
+                    client.sendMessage("GAME_START");
+                }             
             }
         }
 

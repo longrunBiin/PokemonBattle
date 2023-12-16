@@ -24,6 +24,7 @@ public class Client {
     private Waitroom waitroom;
     private PrintWriter out;
     private BufferedReader in;
+    private String thisPlayerID;
 
     public Client() {
         loginFrame = new Login("Login", this::createChatScreen);
@@ -33,7 +34,7 @@ public class Client {
         Point location = loginFrame.getLocation();
         loginFrame.setVisible(false);
 
-        waitroom = new Waitroom("대기실 (User1)");
+        waitroom = new Waitroom("대기실", this);
         waitroom.setLocation(location);
         waitroom.getSendButton().addActionListener(e -> sendMessage());
         String username = JOptionPane.showInputDialog("유저 이름을 입력하세요:");
@@ -51,13 +52,16 @@ public class Client {
             
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            SwingWorker<Void, String> worker = new SwingWorker<>() {
+            SwingWorker<Void, String> worker = new SwingWorker<Void, String>() {
                 @Override
                 protected Void doInBackground() throws Exception {
                     String message;
                     while ((message = in.readLine()) != null) {
+//                        if (message.startsWith("ID:")) {
+//                            thisPlayerID = message.substring(3);
+//                        }
                         publish(message);
-                    }
+                }
                     return null;
                 }
 
@@ -74,7 +78,12 @@ public class Client {
             e.printStackTrace();
         }
     }
-
+        
+    public void sendReadyStatus() {
+    	out.println("READY:" + thisPlayerID); //서버에 준비 전송
+    }
+    
+    
     private void sendMessage() {
         String message = waitroom.getInputBox().getText();
         if (!message.isEmpty()) {

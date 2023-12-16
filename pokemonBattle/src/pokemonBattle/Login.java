@@ -65,7 +65,7 @@ public class Login extends JFrame {
         SwingUtilities.invokeLater(() -> {
             Login frame = new Login("Login", () -> {
                 System.out.println("게임에 접속합니다..");             
-                SwingUtilities.invokeLater(() -> new Waitroom("대기실"));
+                SwingUtilities.invokeLater(() -> new Waitroom("대기실", null));
             });
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);
