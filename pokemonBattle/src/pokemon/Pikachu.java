@@ -6,6 +6,7 @@ import java.util.List;
 import skills.QuickAttack;
 import skills.Skills;
 import skills.ThunderBolt;
+import type.Type;
 
 public class Pikachu extends Pokemon{
 	

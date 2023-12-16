@@ -1,6 +1,4 @@
-package game;
-
-import pokemon.Type;
+package type;
 
 public abstract class TypeCompatibility {
 	 Enum<Type> type;

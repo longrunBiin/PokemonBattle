@@ -34,10 +34,10 @@ public class Client {
         Point location = loginFrame.getLocation();
         loginFrame.setVisible(false);
 
-        waitroom = new Waitroom("´ë±â½Ç", this);
+        waitroom = new Waitroom("ëŒ€ê¸°ì‹¤", this);
         waitroom.setLocation(location);
         waitroom.getSendButton().addActionListener(e -> sendMessage());
-        String username = JOptionPane.showInputDialog("À¯Àú ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä:");
+        String username = JOptionPane.showInputDialog("ìœ ì € ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”:");
 
         startClient(username);
     }
@@ -45,7 +45,7 @@ public class Client {
     private void startClient(String username) {
         try {
             Socket socket = new Socket("localhost", 9999);
-            waitroom.appendText(username + "°ÔÀÓ¿¡ Á¢¼ÓÇÏ¿´½À´Ï´Ù..\n\n");
+            waitroom.appendText(username + "ê²Œì„ì— ì ‘ì†í•˜ì˜€ìŠµë‹ˆë‹¤..\n\n");
 
             out = new PrintWriter(socket.getOutputStream(), true);
             out.println(username);
@@ -57,10 +57,12 @@ public class Client {
                 protected Void doInBackground() throws Exception {
                     String message;
                     while ((message = in.readLine()) != null) {
-//                        if (message.startsWith("ID:")) {
-//                            thisPlayerID = message.substring(3);
-//                        }
+                        if (message.startsWith("ID:")) {
+                            thisPlayerID = message.substring(3);
+                        }
                         publish(message);
+                        waitroom.processServerMessage(message);
+                        
                 }
                     return null;
                 }
@@ -68,7 +70,7 @@ public class Client {
                 @Override
                 protected void process(List<String> chunks) {
                     for (String message : chunks) {
-                        waitroom.appendText("»ó´ë¹æ: " + message + "\n");
+                        waitroom.appendText("ìƒëŒ€ë°©: " + message + "\n");
                     }
                 }
             };
@@ -80,14 +82,14 @@ public class Client {
     }
         
     public void sendReadyStatus() {
-    	out.println("READY:" + thisPlayerID); //¼­¹ö¿¡ ÁØºñ Àü¼Û
+    	out.println("READY:" + thisPlayerID); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Øºï¿½ ï¿½ï¿½ï¿½ï¿½
     }
     
     
     private void sendMessage() {
         String message = waitroom.getInputBox().getText();
         if (!message.isEmpty()) {
-            waitroom.appendText("³ª: " + message + "\n");
+            waitroom.appendText("ë‚˜: " + message + "\n");
             out.println(message);
             waitroom.getInputBox().setText("");
         }

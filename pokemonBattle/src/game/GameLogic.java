@@ -1,7 +1,8 @@
 package game;
 
 import pokemon.Pokemon;
-import pokemon.Type;
+import type.Type;
+import type.TypeFactory;
 
 public class GameLogic {
 	Pokemon pokemon1, pokemon2;
@@ -27,7 +28,7 @@ public class GameLogic {
 
 	public double calculateDamage(Pokemon pokemon1, Pokemon pokemon2) {
 		damage = (pokemon1.getAttack() * pokemon1.getSkillDamage() * (level * 2 / 5 + 2 ) / pokemon2.getDefense() /50 + 2)
-				* typeCompatibility + random;
+				* typeCompatibility * random;
 		
 		return damage;
 	}

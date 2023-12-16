@@ -1,4 +1,4 @@
-package pokemon;
+package type;
 
 public enum Type {
 	NORMAL, ELECTRIC, FIRE, FLYING, POISON, 

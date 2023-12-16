@@ -8,18 +8,18 @@ import javax.swing.SwingWorker;
 
 public class Server {
     private static List<ClientHandler> clients = new ArrayList<>();
-    private static int clientIDCounter = 0; // °íÀ¯ ID Ä«¿îÅÍ
+    private static int clientIDCounter = 0; // ï¿½ï¿½ï¿½ï¿½ ID Ä«ï¿½ï¿½ï¿½ï¿½
 
     public static void main(String[] args) {
         try {
             ServerSocket serverSocket = new ServerSocket(9999);
-            System.out.println("¼­¹ö ½ÇÇà Áß...");
+            System.out.println("ì„œë²„ ì‹¤í–‰ì¤‘...");
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                System.out.println("Å¬¶óÀÌ¾ğÆ® Á¢¼ÓµÊ");
+                System.out.println("í´ë¼ì´ì–¸íŠ¸ ì ‘ì†ë¨");
 
-                String clientID = "Client" + (++clientIDCounter); // °íÀ¯ ID »ı¼º
+                String clientID = "Client" + (++clientIDCounter); // ï¿½ï¿½ï¿½ï¿½ ID ï¿½ï¿½ï¿½ï¿½
                 ClientHandler client = new ClientHandler(clientSocket, clientID);
                 clients.add(client);
 
@@ -36,8 +36,8 @@ public class Server {
         private BufferedReader reader;
         private PrintWriter writer;
         private String clientName;
-        private String clientID; // Å¬¶óÀÌ¾ğÆ® °íÀ¯ ID
-        private boolean isReady = false; //ÁØºñ »óÅÂ ÃßÀû
+        private String clientID; // Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ID
+        private boolean isReady = false; //ï¿½Øºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
         public ClientHandler(Socket socket, String clientID) {
         	this.clientID = clientID;
@@ -46,10 +46,10 @@ public class Server {
                 reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 writer = new PrintWriter(clientSocket.getOutputStream(), true);
                 
-                writer.println("ID:" + clientID); // Å¬¶óÀÌ¾ğÆ®¿¡ ID Àü¼Û
+                writer.println("ID:" + clientID); // Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ ID ï¿½ï¿½ï¿½ï¿½
                               
                 clientName = reader.readLine();
-                System.out.println("Å¬¶óÀÌ¾ğÆ® [" + clientName + "] Á¢¼ÓµÊ");
+                System.out.println("í´ë¼ì´ì–¸íŠ¸ [" + clientName + "] ì ‘ì†ë¨");
                
                 
                 
@@ -68,7 +68,7 @@ public class Server {
                     }
                     
                    
-                    System.out.println("Å¬¶óÀÌ¾ğÆ® [" + clientName + "] ¸Ş½ÃÁö :" + message);
+                    System.out.println("í´ë¼ì´ì–¸íŠ¸ [" + clientName + "] ë©”ì‹œì§€ : " + message);
                     sendToAll(message);
                     
                     if (message.startsWith("READY:")) {
@@ -81,7 +81,7 @@ public class Server {
                     sendToAll(message);
                     }}
                 } catch (IOException e) {
-                    System.out.println("Å¬¶óÀÌ¾ğÆ® [" + clientName + "] ¿¬°áÀÌ ²÷¾îÁ³½À´Ï´Ù.");
+                    System.out.println("í´ë¼ì´ì–¸íŠ¸ [" + clientName + "] ì—°ê²°ì´ ëŠì–´ì¡ŒìŠµë‹ˆë‹¤.");
                     e.printStackTrace();
                     
                 }
@@ -89,10 +89,10 @@ public class Server {
         }
         
         private void checkAllReady() {
-            // ¸ğµç Å¬¶óÀÌ¾ğÆ®°¡ ÁØºñµÇ¾ú´ÂÁö È®ÀÎÇÏ´Â ·ÎÁ÷
+            // ëª¨ë“  í´ë¼ì´ì–¸íŠ¸ê°€ ì¤€ë¹„ë˜ì—ˆëŠ”ì§€ í™•ì¸í•˜ëŠ” ë¡œì§
             boolean allReady = clients.stream().allMatch(client -> client.isReady);
             if (allReady) {
-                // ¸ğµç Å¬¶óÀÌ¾ğÆ®¿¡°Ô °ÔÀÓ ½ÃÀÛ ¸Ş½ÃÁö º¸³»±â
+                // ëª¨ë“  í´ë¼ì´ì–¸íŠ¸ì—ê²Œ ê²Œì„ ì‹œì‘ ë©”ì‹œì§€ ë³´ë‚´ê¸°
                 for (ClientHandler client : clients) {
                     client.sendMessage("GAME_START");
                 }             

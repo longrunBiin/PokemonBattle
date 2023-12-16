@@ -1,6 +1,6 @@
 package skills;
 
-import pokemon.Type;
+import type.Type;
 
 public class Flamethrower extends Skills{
 

@@ -3,6 +3,7 @@ package pokemon;
 import java.util.List;
 
 import skills.Skills;
+import type.Type;
 
 public class PokemonModel {
 	public String name;

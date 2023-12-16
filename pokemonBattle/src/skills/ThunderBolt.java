@@ -1,6 +1,6 @@
 package skills;
 
-import pokemon.Type;
+import type.Type;
 
 public class ThunderBolt extends Skills{
 	

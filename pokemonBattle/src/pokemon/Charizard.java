@@ -8,6 +8,7 @@ import skills.Flamethrower;
 import skills.QuickAttack;
 import skills.Skills;
 import skills.ThunderBolt;
+import type.Type;
 
 public class Charizard extends Pokemon{
 	

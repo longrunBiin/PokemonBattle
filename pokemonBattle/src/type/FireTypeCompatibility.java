@@ -1,6 +1,4 @@
-package game;
-
-import pokemon.Type;
+package type;
 
 public class FireTypeCompatibility extends TypeCompatibility{
 
@@ -11,9 +9,9 @@ public class FireTypeCompatibility extends TypeCompatibility{
 	@Override
     public double checkCompatibility() {
         switch ((Type)type) {
-            case WATER: case GROUND: case ROCK:
+            case GRASS: case ICE: case BUG: case METAL:
                 return 2.0;
-            case FIRE: case GRASS: case ICE: case BUG: case METAL:
+            case FIRE: case WATER: case ROCK:
             	return 0.5;
             default:
                 return 1.0; 

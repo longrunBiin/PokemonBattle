@@ -17,7 +17,7 @@ public class Login extends JFrame {
         URL iconURL = getClass().getResource(imagePath);
         if (iconURL == null) {
             // 
-            System.err.println("¿À·ù.: " + imagePath);
+            System.err.println("ì˜¤ë¥˜.: " + imagePath);
             return;
         }
         ImageIcon backgroundIcon = new ImageIcon(iconURL);
@@ -30,14 +30,14 @@ public class Login extends JFrame {
 
         
         
-        JButton startButton = new JButton("½ÃÀÛÇÏ±â");
+        JButton startButton = new JButton("ì‹œìž‘í•˜ê¸°");
         startButton.setFont(new Font("Arial Black", Font.BOLD, 20));
         startButton.setForeground(Color.WHITE);
         startButton.setBackground(Color.RED);
         startButton.setFocusPainted(false);
         startButton.addActionListener(e -> onStartChat.run());
         
-        startButton.setFont(new Font("±¼¸²", Font.BOLD, 20));
+        startButton.setFont(new Font("êµ´ë¦¼", Font.BOLD, 20));
         startButton.setFocusPainted(false);
 
         
@@ -64,8 +64,8 @@ public class Login extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             Login frame = new Login("Login", () -> {
-                System.out.println("°ÔÀÓ¿¡ Á¢¼ÓÇÕ´Ï´Ù..");             
-                SwingUtilities.invokeLater(() -> new Waitroom("´ë±â½Ç", null));
+                System.out.println("ê²Œìž„ì— ì ‘ì†í•©ë‹ˆë‹¤..");             
+                SwingUtilities.invokeLater(() -> new Waitroom("ëŒ€ê¸°ì‹¤", null));
             });
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);
