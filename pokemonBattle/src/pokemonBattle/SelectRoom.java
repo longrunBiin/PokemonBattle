@@ -18,9 +18,10 @@ import javax.swing.JTextArea;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 
-public class Selectroom extends JFrame implements ActionListener{
+public class SelectRoom extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -53,7 +54,7 @@ public class Selectroom extends JFrame implements ActionListener{
 	/**
 	 * Create the frame.
 	 */
-	public Selectroom(Client client) {
+	public SelectRoom(Client client) {
 		this.client = client;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,16 +78,18 @@ public class Selectroom extends JFrame implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				player = new Player(myPokemon);
 				client.sendBattleReadyStatus();
-				System.out.println("player ready");
+				try {
+					client.sendPlayerReady();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		btnNewButton_2.setBounds(260, 350, 149, 57);
 		contentPane.add(btnNewButton_2);
 		
-
-		JButton btnNewButton_1_1 = new JButton("POKEMON2");
-		btnNewButton_1_1.setBounds(488, 69, 190, 210);
-		contentPane.add(btnNewButton_1_1);
 		
 		pikachuButton.addActionListener(this);
 		charmanderButton.addActionListener(this);
@@ -107,9 +110,12 @@ public class Selectroom extends JFrame implements ActionListener{
 		}
 
 
-		
-
-		
+	
 
 	}
+	
+	 public Player getPlayer() {
+		return player;
+		 
+	 }
 }

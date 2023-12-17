@@ -2,27 +2,45 @@
 package pokemonBattle;
 
 import javax.swing.*;
-import java.awt.*;
 
-public class PokemonBattleGUI extends JFrame {
+import game.Player;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+public class PokemonBattleGUI extends JFrame implements ActionListener{
 
     private JLabel player1PokemonHP, player2PokemonHP;
     private JLabel player1PokemonImageLabel, player2PokemonImageLabel;
     private JTextArea battleLog;
     private JProgressBar player1HPBar, player2HPBar;
+    
+    JButton skill1;
+    JButton skill2;
+    JButton skill3;
+    JButton skill4;
+    
+    Player player;
+    
+    List<String> skillNames = new ArrayList<>();
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            try {
-                PokemonBattleGUI frame = new PokemonBattleGUI();
-                frame.setVisible(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
+//    public static void main(String[] args) {
+//        EventQueue.invokeLater(() -> {
+//            try {
+//                PokemonBattleGUI frame = new PokemonBattleGUI();
+//                frame.setVisible(true);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        });
+//    }
 
-    public PokemonBattleGUI() {
+    public PokemonBattleGUI(Player player) {
+    	this.player = player;
+    	
         setTitle("포켓몬 배틀");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,22 +90,38 @@ public class PokemonBattleGUI extends JFrame {
         getContentPane().add(panel);
         panel.setLayout(null);
         
-        JButton skill1 = new JButton("\uC2A4\uD0AC1");
+        skillNames = player.getPokemonSkill();
+        skill1 = new JButton(skillNames.get(0));
         skill1.setBounds(10, 10, 118, 85);
         panel.add(skill1);
         
-        JButton skill2 = new JButton("\uC2A4\uD0AC2");
+        skill2 = new JButton(skillNames.get(1));
         skill2.setBounds(161, 10, 127, 85);
         panel.add(skill2);
         
-        JButton skill3 = new JButton("\uC2A4\uD0AC3");
+        skill3 = new JButton("skillNames.get(2)");
         skill3.setBounds(10, 105, 118, 85);
         panel.add(skill3);
         
-        JButton skill4 = new JButton("\uC2A4\uD0AC4");
+        skill4 = new JButton("skillNames.get(3)");
         skill4.setBounds(161, 105, 127, 85);
         panel.add(skill4);
+        
+        skill1.addActionListener(this);
+        skill2.addActionListener(this);
+        skill3.addActionListener(this);
+        skill4.addActionListener(this);
 
         // 이벤트 리스너 및 게임 로직은
         }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()== skill1) {
+			player.useSkill("1");
+		}else if(e.getSource()==skill2) {
+			player.useSkill("2");
+		}
+		
+	}
 }

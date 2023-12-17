@@ -1,25 +1,28 @@
 package game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import pokemon.Pokemon;
 
-public class Player {
-	List<Pokemon> pokemonList = new ArrayList<>();
-	
-	public Player(Pokemon pokemon){
-		pokemonList.add(pokemon);
+public class Player implements Serializable {
+	Pokemon pokemon;
+
+	public Player(Pokemon pokemon) {
+		this.pokemon = pokemon;
 	}
-	public void getPokemon() {
-		for(Pokemon p : pokemonList) {
-			System.out.println("my pokemon = " + p.getName());
-		}
+
+	public Pokemon getPokemon() {
+		return pokemon;
 	}
+
+	public List<String> getPokemonSkill() {
+		List<String> skillnames = pokemon.getSkillname(); //직렬화되지 않으므로 에러 발생 가능
+		return skillnames;
+	}
+
 	public void useSkill(String skill) {
-		for(Pokemon p : pokemonList) {
-			System.out.println("pokemon use= " );
-			p.useSkill(skill);
-		}
+		pokemon.useSkill(skill);
 	}
 }

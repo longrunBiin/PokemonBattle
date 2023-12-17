@@ -1,11 +1,12 @@
 package pokemon;
 
+import java.io.Serializable;
 import java.util.List;
 
 import skills.Skills;
 import type.Type;
 
-public class PokemonModel {
+public class PokemonModel implements Serializable{
 	public String name;
     public int health;
     Enum<Type> type;

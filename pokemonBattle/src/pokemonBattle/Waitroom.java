@@ -3,6 +3,9 @@ package pokemonBattle;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+
+import game.Player;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +17,7 @@ public class Waitroom extends JFrame {
     private JScrollPane scrollPane;
     private JPanel contentPane;
 
-    Selectroom selectRoom;
+    SelectRoom selectRoom;
     
     public static void main(String[] args) {
 //		EventQueue.invokeLater(new Runnable() {
@@ -29,7 +32,7 @@ public class Waitroom extends JFrame {
 //		});
 	}
     
-    private Client client;
+    private Client client; 
     
     public Waitroom(String title, Client client) {
     	
@@ -111,42 +114,6 @@ public class Waitroom extends JFrame {
         textArea.setCaretPosition(textArea.getDocument().getLength());
     }
     
-    public void processServerMessage(String message) {
-//      if (message.startsWith("READY_STATUS:")) {
-//      // 서버에서 보낸 준비 상태 메시지 처리
-//      String[] parts = message.split(":");
-//      String playerID = parts[1];
-//      boolean isReady = Boolean.parseBoolean(parts[2]);
-//      // 플레이어 ID와 준비 상태를 화면에 표시
-//      appendText(playerID + (isReady ? " 준비 완료\n" : " 준비 취소\n"));
-//  } else if (message.equals("GAME_START")) {
-//      // 게임 시작 처리
-//      EventQueue.invokeLater(() -> {
-//          Selectroom selectRoom = new Selectroom();
-//          selectRoom.setVisible(true);
-//      });
-
-    
-    	if (message.equals("GAME_START")) {
-            EventQueue.invokeLater(() -> {
-                selectRoom = new Selectroom(client);
-                selectRoom.setVisible(true);
-                this.setVisible(false);
-            });
-    	}
-        else if(message.equals("BATTLE_START")) {System.out.println("배틀룸 연결 1 ");
-        	EventQueue.invokeLater(() -> {
-               PokemonBattleGUI battleRoom = new PokemonBattleGUI();
-                battleRoom.setVisible(true);
-                selectRoom.setVisible(false);
-                System.out.println("배틀룸 연결 ");
-            });
-            }
-        else {
-        	// 다른 메시지 처리
-            //appendText("����: " + message + "\n");
-        
-        }
-     }
+   
  }
 

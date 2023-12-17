@@ -11,12 +11,14 @@ import pokemon.Charmander;
 import pokemon.Pikachu;
 import pokemon.Pokemon;
 
+import java.awt.EventQueue;
 import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
@@ -25,7 +27,17 @@ public class Client {
     private PrintWriter out;
     private BufferedReader in;
     private String thisPlayerID;
-
+    
+    OutputStream os;
+	InputStream is;
+	ObjectOutputStream oos;
+	ObjectInputStream ois;
+    
+    SelectRoom selectRoom;
+    GameLogic gameLogic;
+    Pokemon myPokemon, yourPokemon;
+    private List<Player> players = new ArrayList<>();
+    
     public Client() {
         loginFrame = new Login("Login", this::createChatScreen);
     }
@@ -51,6 +63,11 @@ public class Client {
             out.println(username);
             
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            
+            os = socket.getOutputStream();
+			//is = socket.getInputStream();
+			
+			//ois = new ObjectInputStream(is);
 
             SwingWorker<Void, String> worker = new SwingWorker<Void, String>() {
                 @Override
@@ -61,7 +78,7 @@ public class Client {
                             thisPlayerID = message.substring(3);
                         }
                         publish(message);
-                        waitroom.processServerMessage(message);
+                        processServerMessage(message);
                         
                 }
                     return null;
@@ -87,6 +104,20 @@ public class Client {
     public void sendBattleReadyStatus() {
     	out.println("BATTLE:" + thisPlayerID); //배틀 준비 완료 시 전송 
     }
+    public void sendPlayerReady() throws IOException {
+    	 Player player = selectRoom.getPlayer();
+		    if (player != null) {
+    	 try {
+    		oos = new ObjectOutputStream(os);
+			oos.writeObject(player);
+			oos.flush();
+			out.println("PLAYER:" + thisPlayerID); //플레이어 준비 완료 시 전송 
+			System.out.println("player send " + selectRoom.getPlayer().getPokemon().getName());    
+    		} catch (IOException e) {
+			e.printStackTrace();
+		}
+   	 }
+    }
     
     
     private void sendMessage() {
@@ -97,14 +128,49 @@ public class Client {
             waitroom.getInputBox().setText("");
         }
     }
+    
+    public void processServerMessage(String message) throws ClassNotFoundException, IOException {
+    	if (message.equals("GAME_START")) {
+            EventQueue.invokeLater(() -> {
+                selectRoom = new SelectRoom(this);
+                selectRoom.setVisible(true);
+                waitroom.setVisible(false);
+            });
+    	}
+    	else if(message.equals("BATTLE_START")) {
+        	EventQueue.invokeLater(() -> {
+        		PokemonBattleGUI battleRoom = new PokemonBattleGUI(selectRoom.getPlayer());
+                battleRoom.setVisible(true);
+                selectRoom.setVisible(false);
+               
+                System.out.println("배틀룸 연결 ");
+            	});
+    	}else if (message.equals("PLAYER_MATCH")) {
+//             다른 플레이어의 선택한 포켓몬 정보를 수신
+            Player player = (Player)ois.readObject();
+            System.out.println("player received " + player.getPokemon().getName());
+
+//             해당 플레이어 정보를 UI에 표시
+//            selectRoom.updatePlayerInfo(player);
+        }
+        
+        else {
+        	// 다른 메시지 처리
+            //appendText("����: " + message + "\n");
+        
+        }
+     }
+    
+    public void setGameLogic(Player player) {
+    	gameLogic = new GameLogic(player.getPokemon(), player.getPokemon());
+    }
+    public SelectRoom getSelectRoom() {
+    	return selectRoom; 
+    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(Client::new);
-        Pokemon poke2 = new Pikachu();
-		Pokemon poke = new Charmander();
-		
-		Player player1 = new Player(poke);
-		Player player2 = new Player(poke2);
+        
 		
 //		player1.useSkill("1");
 //		player2.useSkill("1");

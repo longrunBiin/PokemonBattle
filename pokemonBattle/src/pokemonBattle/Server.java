@@ -6,6 +6,8 @@ import java.util.*;
 
 import javax.swing.SwingWorker;
 
+import game.Player;
+
 public class Server {
     private static List<ClientHandler> clients = new ArrayList<>();
     private static int clientIDCounter = 0; // 고유 ID 카운터
@@ -39,7 +41,14 @@ public class Server {
         private String clientID; // 클라이언트 고유 ID
         private boolean isReady = false; //준비 상태 추적
         private boolean battleIsReady = false;
-
+        
+        InputStream is;
+        OutputStream os;
+        ObjectInputStream ois;
+        ObjectOutputStream oos;
+        
+        private List<Player> players = new ArrayList<>();
+        
         public ClientHandler(Socket socket, String clientID) {
         	this.clientID = clientID;
             try {
@@ -47,16 +56,22 @@ public class Server {
                 reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 writer = new PrintWriter(clientSocket.getOutputStream(), true);
                 
+                is = clientSocket.getInputStream();
+//    			os = socket.getOutputStream();
+                
+//    			oos = new ObjectOutputStream(os);
+                
                 writer.println("ID:" + clientID); // 클라이언트에 ID 전송                              
                 clientName = reader.readLine();
                 System.out.println("클라이언트 [" + clientName + "] 접속됨");
+                
                
                 
                 
                 
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            } 
         }
 
         public void run() {
@@ -70,6 +85,7 @@ public class Server {
                    
                     System.out.println("클라이언트 [" + clientName + "] 메시지 : " + message);
                     sendToAll(message);
+                    
                     
                     if (message.startsWith("READY:")) {
                         String clientId = message.split(":")[1];
@@ -87,15 +103,31 @@ public class Server {
                         }
                         sendToAll(message);
                     }
-                      
-                    
-                    
+                    else if (message.startsWith("PLAYER:")) {
+                        String clientId = message.split(":")[1];
+                        if (clientId.equals(this.clientID)) {
+                        	ois = new ObjectInputStream(is);
+                        	Player player = (Player)ois.readObject();
+                            players.add(clientIDCounter, player);
+                            System.out.println("player received " + clientIDCounter + " " + player.getPokemon().getName());
+                            for (ClientHandler client : clients) {
+                                client.sendMessage("PLAYER_MATCH");
+                            }
+                        }
+                        sendToAll(message);
+                    }
+//                    
+//                    
                   }
-                } catch (IOException e) {
+                } 
+            	catch (IOException e) {
                     System.out.println("클라이언트 [" + clientName + "] 연결이 끊어졌습니다.");
                     e.printStackTrace();
                     
-                }
+                } catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             
         }
         
@@ -119,7 +151,7 @@ public class Server {
                 }             
             }
         }
-
+      
         private void sendToAll(String message) {
             for (ClientHandler client : clients) {
                 if (client != this) {
@@ -131,6 +163,7 @@ public class Server {
         private void sendMessage(String message) {
             writer.println(message);
         }
+        
     }
 }
 

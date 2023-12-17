@@ -1,8 +1,10 @@
 package skills;
 
+import java.io.Serializable;
+
 import type.Type;
 
-public abstract class Skills {
+public abstract class Skills implements Serializable{
 	String name;
 	Type type;
 	int damage;
@@ -16,5 +18,8 @@ public abstract class Skills {
 	
 	public int getDamage() {
 		return damage;
+	}
+	public String getName() {
+		return name;
 	}
 }
