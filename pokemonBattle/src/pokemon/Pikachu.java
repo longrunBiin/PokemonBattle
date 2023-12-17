@@ -5,6 +5,7 @@ import java.util.List;
 
 import skills.QuickAttack;
 import skills.Skills;
+import skills.Tackle;
 import skills.ThunderBolt;
 import type.Type;
 
@@ -19,6 +20,7 @@ public class Pikachu extends Pokemon{
 		List<Skills> skill = new ArrayList();
 		skill.add(new ThunderBolt());
 		skill.add(new QuickAttack());
+		skill.add(new Tackle());
 		return skill;
 	}
 
@@ -27,6 +29,7 @@ public class Pikachu extends Pokemon{
 		switch(skillName) {
 		case "1" : model.skills.get(0).useSkill(); break;
 		case "2" : model.skills.get(1).useSkill(); break;
+		case "3" : model.skills.get(2).useSkill(); break;
 		}
 	}
 }
