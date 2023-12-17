@@ -13,15 +13,16 @@ import pokemon.Pokemon;
 
 import java.awt.FlowLayout;
 import javax.swing.JToolBar;
+import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JCheckBox;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.awt.event.ActionEvent;
 
-public class SelectRoom extends JFrame implements ActionListener{
+public class Selectroom extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -54,7 +55,7 @@ public class SelectRoom extends JFrame implements ActionListener{
 	/**
 	 * Create the frame.
 	 */
-	public SelectRoom(Client client) {
+	public Selectroom(Client client) {
 		this.client = client;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,31 +66,69 @@ public class SelectRoom extends JFrame implements ActionListener{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		pikachuButton = new JButton("PIKACHU");
-		pikachuButton.setBounds(10, 69, 190, 210);
-		contentPane.add(pikachuButton);
+//		ImageIcon pikachuIcon = new ImageIcon(getClass().getResource("/image/Pikachu_front.png"));
+//		pikachuButton.setIcon(pikachuIcon);
+//		pikachuButton = new JButton("PIKACHU", pikachuIcon);
+//		pikachuButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+//		pikachuButton.setHorizontalTextPosition(SwingConstants.CENTER);
+//		pikachuButton = new JButton("PIKACHU");
+//		pikachuButton.setBounds(10, 69, 190, 210);
+//		contentPane.add(pikachuButton);
 		
-		charmanderButton = new JButton("CHARMANDER");
-		charmanderButton.setBounds(247, 69, 190, 210);
+		// 이미지 아이콘 생성
+		ImageIcon pikachuIcon = new ImageIcon(getClass().getResource("/image/Pikachu_front.png"));
+
+		// 버튼 생성과 동시에 아이콘과 텍스트 설정
+		pikachuButton = new JButton("PIKACHU", pikachuIcon);
+
+		// 텍스트 위치 설정
+		pikachuButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+		pikachuButton.setHorizontalTextPosition(SwingConstants.CENTER);
+
+		// 버튼 위치 및 크기 설정
+		pikachuButton.setBounds(10, 69, 190, 229);
+
+		// 콘텐츠 팬에 버튼 추가
+		contentPane.add(pikachuButton);
+
+		
+//		charmanderButton = new JButton("CHARMANDER");
+//		charmanderButton.setBounds(247, 69, 190, 210);
+//		contentPane.add(charmanderButton);
+		
+		// 차맨더 이미지 아이콘 생성
+		ImageIcon charmanderIcon = new ImageIcon(getClass().getResource("/image/CHARMANDER_front.png"));
+
+		// 버튼 생성과 동시에 아이콘과 텍스트 설정
+		charmanderButton = new JButton("CHARMANDER", charmanderIcon);
+
+		// 텍스트 위치 설정
+		charmanderButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+		charmanderButton.setHorizontalTextPosition(SwingConstants.CENTER);
+
+		// 버튼 위치 및 크기 설정
+		charmanderButton.setBounds(247, 69, 190, 229);
+
+		// 콘텐츠 팬에 버튼 추가
 		contentPane.add(charmanderButton);
+
+		
 		
 		JButton btnNewButton_2 = new JButton("READY");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				player = new Player(myPokemon);
 				client.sendBattleReadyStatus();
-				try {
-					client.sendPlayerReady();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
+				System.out.println("player ready");
 			}
 		});
 		btnNewButton_2.setBounds(260, 350, 149, 57);
 		contentPane.add(btnNewButton_2);
 		
+
+		JButton btnNewButton_1_1 = new JButton("POKEMON2");
+		btnNewButton_1_1.setBounds(488, 69, 190, 229);
+		contentPane.add(btnNewButton_1_1);
 		
 		pikachuButton.addActionListener(this);
 		charmanderButton.addActionListener(this);
@@ -109,13 +148,11 @@ public class SelectRoom extends JFrame implements ActionListener{
 			System.out.println("charmander select");
 		}
 
-
-	
+		
+		
 
 	}
-	
-	 public Player getPlayer() {
+	public Player getPlayer() {
 		return player;
-		 
-	 }
+	}
 }

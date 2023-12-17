@@ -11,7 +11,7 @@ import type.Type;
 public class Pikachu extends Pokemon{
 	
 	public Pikachu() {
-		model = new PokemonModel("pikachu", 100, Type.ELECTRIC, skills, "", 150, 50);
+		model = new PokemonModel("pikachu", 100, Type.ELECTRIC, skills, "/image/Pikachu_front.png", 150, 50);
 	}
 
 	@Override

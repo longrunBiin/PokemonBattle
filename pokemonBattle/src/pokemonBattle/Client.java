@@ -33,7 +33,7 @@ public class Client {
 	ObjectOutputStream oos;
 	ObjectInputStream ois;
     
-    SelectRoom selectRoom;
+    Selectroom selectRoom;
     GameLogic gameLogic;
     Pokemon myPokemon, yourPokemon;
     private List<Player> players = new ArrayList<>();
@@ -132,7 +132,7 @@ public class Client {
     public void processServerMessage(String message) throws ClassNotFoundException, IOException {
     	if (message.equals("GAME_START")) {
             EventQueue.invokeLater(() -> {
-                selectRoom = new SelectRoom(this);
+                selectRoom = new Selectroom(this);
                 selectRoom.setVisible(true);
                 waitroom.setVisible(false);
             });
@@ -164,7 +164,7 @@ public class Client {
     public void setGameLogic(Player player) {
     	gameLogic = new GameLogic(player.getPokemon(), player.getPokemon());
     }
-    public SelectRoom getSelectRoom() {
+    public Selectroom getSelectRoom() {
     	return selectRoom; 
     }
 

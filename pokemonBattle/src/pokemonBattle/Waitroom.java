@@ -17,7 +17,7 @@ public class Waitroom extends JFrame {
     private JScrollPane scrollPane;
     private JPanel contentPane;
 
-    SelectRoom selectRoom;
+    Selectroom selectRoom;
     
     public static void main(String[] args) {
 //		EventQueue.invokeLater(new Runnable() {
