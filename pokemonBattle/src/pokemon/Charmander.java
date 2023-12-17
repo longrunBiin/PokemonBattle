@@ -6,6 +6,7 @@ import java.util.List;
 import skills.DragonRage;
 import skills.Flamethrower;
 import skills.QuickAttack;
+import skills.Scratch;
 import skills.Skills;
 import skills.Tackle;
 import skills.ThunderBolt;
@@ -23,6 +24,7 @@ public class Charmander extends Pokemon{//파이리
 		skill.add(new DragonRage());
 		skill.add(new Flamethrower());
 		skill.add(new Tackle());
+		skill.add(new Scratch());
 		return skill;
 	}
 
@@ -32,6 +34,7 @@ public class Charmander extends Pokemon{//파이리
 		case "1" : model.skills.get(0).useSkill(); break;
 		case "2" : model.skills.get(1).useSkill(); break;
 		case "3" : model.skills.get(2).useSkill(); break;
+		case "4" : model.skills.get(3).useSkill(); break;
 		}
 	}
 

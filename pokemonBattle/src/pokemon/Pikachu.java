@@ -3,6 +3,7 @@ package pokemon;
 import java.util.ArrayList;
 import java.util.List;
 
+import skills.IronTail;
 import skills.QuickAttack;
 import skills.Skills;
 import skills.Tackle;
@@ -21,6 +22,7 @@ public class Pikachu extends Pokemon{
 		skill.add(new ThunderBolt());
 		skill.add(new QuickAttack());
 		skill.add(new Tackle());
+		skill.add(new IronTail());
 		return skill;
 	}
 
@@ -30,6 +32,7 @@ public class Pikachu extends Pokemon{
 		case "1" : model.skills.get(0).useSkill(); break;
 		case "2" : model.skills.get(1).useSkill(); break;
 		case "3" : model.skills.get(2).useSkill(); break;
+		case "4" : model.skills.get(3).useSkill(); break;
 		}
 	}
 }
