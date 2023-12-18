@@ -104,9 +104,9 @@ public class Client {
     public void sendPlayerReady() throws IOException {
     	 Player player = selectRoom.getPlayer();
 		    if (player != null) {
-		    	String mypokemon = player.getPokemon().getName();
+		    	myPokemon = player.getPokemon().getName();
 		    	
-		    	out.println("PLAYER:" + thisPlayerID + "POKEMON:" + mypokemon); //플레이어 준비 완료 시 전송
+		    	out.println("PLAYER:" + thisPlayerID + "POKEMON:" + myPokemon); //플레이어 준비 완료 시 전송
 				  
    	 }
 		    else {
@@ -141,16 +141,10 @@ public class Client {
                
                 System.out.println("배틀룸 연결 ");
             	});
-    	}else if (message.equals("PLAYER_MATCH")) {
-//             다른 플레이어의 선택한 포켓몬 정보를 수신
-            Player player = (Player)ois.readObject();
-            out.println("player received " + player.getPokemon().getName());
-
-//             해당 플레이어 정보를 UI에 표시
-//            selectRoom.updatePlayerInfo(player);
-        }
-        
-        else {
+    	}else if (message.startsWith("ENEMY")) {
+    		yourPokemon = message.split(":")[1];
+    		out.println("mine : " + myPokemon + " yours : " + yourPokemon); //플레이어 준비 완료 시 전송
+    	}else {
         	// 다른 메시지 처리
             //appendText("����: " + message + "\n");
         

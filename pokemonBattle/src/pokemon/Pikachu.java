@@ -13,6 +13,7 @@ import type.Type;
 public class Pikachu extends Pokemon{
 	
 	public Pikachu() {
+		skills = matchSkills();
 		model = new PokemonModel("pikachu", 100, Type.ELECTRIC, skills, "/image/Pikachu_front.png", 150, 50);
 	}
 

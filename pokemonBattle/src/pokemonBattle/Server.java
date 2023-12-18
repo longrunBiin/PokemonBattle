@@ -109,12 +109,9 @@ public class Server {
                         else
                         	pokemon2 = playerPokemon;
                         System.out.println("pokemon1 = " + pokemon1 + " pokemon2 = " + pokemon2);
-                        sendToAll(message);
                         
-                        if ("Client1".equals(this.clientID))
-                        	clients.get(0).sendMessage("enemy's Pokemon = "+pokemon2);
-                        else
-                        	clients.get(1).sendMessage("enemy's Pokemon = "+pokemon1);
+                        if(pokemon1 != null && pokemon2 != null)
+                        	sendEnemyPokemon(message);
                         	
                     }
 //                    
@@ -156,6 +153,12 @@ public class Server {
                     client.sendMessage(message);
                 }
             }
+        }
+        
+        private void sendEnemyPokemon(String message) {
+            	clients.get(0).sendMessage("ENEMY : " + pokemon2);
+            	clients.get(1).sendMessage("ENEMY : "+ pokemon1);
+          
         }
         
         private void handleClientMessage(Object message) {
