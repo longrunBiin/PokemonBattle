@@ -123,6 +123,10 @@ public class PokemonBattleGUI extends JFrame implements ActionListener{
 			player.useSkill("1");
 		}else if(e.getSource()==skill2) {
 			player.useSkill("2");
+		}else if(e.getSource()==skill3) {
+			player.useSkill("3");
+		}else if(e.getSource()==skill4) {
+			player.useSkill("4");
 		}
 		
 	}
