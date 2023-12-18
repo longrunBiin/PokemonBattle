@@ -6,6 +6,7 @@ import java.util.*;
 
 import javax.swing.SwingWorker;
 
+import game.GameLogic;
 import game.Player;
 
 public class Server {
@@ -64,10 +65,6 @@ public class Server {
                 writer.println("ID:" + clientID); // 클라이언트에 ID 전송                              
                 clientName = reader.readLine();
                 System.out.println("클라이언트 [" + clientName + "] 접속됨");
-                
-               
-                
-                
                 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -163,7 +160,16 @@ public class Server {
         private void sendMessage(String message) {
             writer.println(message);
         }
-        
+        public GameLogic getGameLogic() {
+        	String clientId = clientID.split("t")[1];
+        	int id = Integer.parseInt(clientId);
+        	int id2;
+        	if(id==1) id2=2;
+        	else id2=1;
+        	
+        	GameLogic gameLogic = new GameLogic(players.get(id).getPokemon(), players.get(id2).getPokemon());
+        	return gameLogic;
+        }   
     }
 }
 

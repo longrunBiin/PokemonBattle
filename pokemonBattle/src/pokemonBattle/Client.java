@@ -34,9 +34,10 @@ public class Client {
 	ObjectInputStream ois;
     
     Selectroom selectRoom;
-    GameLogic gameLogic;
+    PokemonBattleGUI battleRoom;
+    
     Pokemon myPokemon, yourPokemon;
-    private List<Player> players = new ArrayList<>();
+    private Player player;
     
     public Client() {
         loginFrame = new Login("Login", this::createChatScreen);
@@ -108,6 +109,7 @@ public class Client {
     	 Player player = selectRoom.getPlayer();
 		    if (player != null) {
     	 try {
+    		 System.out.println("SUCCESS   GGG");
     		oos = new ObjectOutputStream(os);
 			oos.writeObject(player);
 			oos.flush();
@@ -139,7 +141,7 @@ public class Client {
     	}
     	else if(message.equals("BATTLE_START")) {
         	EventQueue.invokeLater(() -> {
-        		PokemonBattleGUI battleRoom = new PokemonBattleGUI(selectRoom.getPlayer());
+        		PokemonBattleGUI battleRoom = new PokemonBattleGUI(this, selectRoom.getPlayer());
                 battleRoom.setVisible(true);
                 selectRoom.setVisible(false);
                
@@ -161,9 +163,7 @@ public class Client {
         }
      }
     
-    public void setGameLogic(Player player) {
-    	gameLogic = new GameLogic(player.getPokemon(), player.getPokemon());
-    }
+    
     public Selectroom getSelectRoom() {
     	return selectRoom; 
     }

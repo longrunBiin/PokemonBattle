@@ -24,6 +24,7 @@ public class PokemonBattleGUI extends JFrame implements ActionListener{
     JButton skill4;
     
     Player player;
+    Client client;
     
     List<String> skillNames = new ArrayList<>();
 
@@ -38,8 +39,9 @@ public class PokemonBattleGUI extends JFrame implements ActionListener{
 //        });
 //    }
 
-    public PokemonBattleGUI(Player player) {
+    public PokemonBattleGUI(Client client, Player player) {
     	this.player = player;
+    	this.client = client;
     	
         setTitle("포켓몬 배틀");
         setSize(800, 600);

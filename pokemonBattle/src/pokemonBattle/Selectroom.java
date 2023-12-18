@@ -20,6 +20,7 @@ import javax.swing.JCheckBox;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 public class Selectroom extends JFrame implements ActionListener{
@@ -119,6 +120,14 @@ public class Selectroom extends JFrame implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				player = new Player(myPokemon);
 				client.sendBattleReadyStatus();
+				try {
+					client.sendPlayerReady();
+					System.out.println("SUCCESS");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+					System.out.println("ERROR");
+				}
 				System.out.println("player ready");
 			}
 		});
