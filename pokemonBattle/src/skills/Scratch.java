@@ -9,9 +9,10 @@ public class Scratch extends Skills{
 	}
 
 	@Override
-	public void useSkill() {
+	public int useSkill() {
 		System.out.println("use scratch " + name + type + damage);
-		
+		return damage;	
 	}
 }
+
 

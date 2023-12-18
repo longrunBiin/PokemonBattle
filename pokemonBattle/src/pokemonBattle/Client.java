@@ -161,6 +161,21 @@ public class Client {
     public Selectroom getSelectRoom() {
     	return selectRoom; 
     }
+    public void useSkill(String skillName) {
+        Player player = getPlayer(); // 현재 플레이어 객체 가져오기
+        int damage = player.getPokemon().useSkill(skillName); // 데미지 계산
+
+        sendDamageToServer(damage); // 서버에 데미지 전송
+    }
+    private void sendDamageToServer(int damage) {
+        try {
+            out.writeObject("SKILL_DAMAGE:" + damage);
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(Client::new);

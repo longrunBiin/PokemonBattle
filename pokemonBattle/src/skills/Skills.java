@@ -14,7 +14,7 @@ public abstract class Skills implements Serializable{
 		this.type = type;
 		this.damage = damage;
 	}
-	public abstract void useSkill();
+	public abstract int useSkill();
 	
 	public int getDamage() {
 		return damage;

@@ -9,8 +9,8 @@ public class Flamethrower extends Skills{
 	}
 	
 	@Override
-	public void useSkill() {
+	public int useSkill() {
 		System.out.println("use Flamethrower " + name + type + damage);
-		
+		return damage;
 	}
 }

@@ -8,8 +8,9 @@ public class IronTail extends Skills{
 		super("아이언테일", Type.METAL, 5);
 	}
 	@Override
-	public void useSkill() {
+	public int useSkill() {
 		System.out.println("use Irontail " + name + type + damage);
+		return damage;
 		
 	}
 	
