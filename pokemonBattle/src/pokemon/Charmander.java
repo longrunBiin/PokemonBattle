@@ -15,7 +15,7 @@ import type.Type;
 public class Charmander extends Pokemon{//파이리 
 	
 	public Charmander() {
-		model = new PokemonModel("charizard", 100, Type.FIRE, skills, "", 50, 100);
+		model = new PokemonModel("charmander", 100, Type.FIRE, skills, "", 50, 100);
 	}
 
 	@Override

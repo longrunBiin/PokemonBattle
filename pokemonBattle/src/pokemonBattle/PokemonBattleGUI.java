@@ -8,6 +8,7 @@ import game.Player;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +44,8 @@ public class PokemonBattleGUI extends JFrame implements ActionListener{
     	this.player = player;
     	this.client = client;
     	
+    	
+    	
         setTitle("포켓몬 배틀");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,6 +62,8 @@ public class PokemonBattleGUI extends JFrame implements ActionListener{
         player2PokemonImageLabel = new JLabel(new ImageIcon(getClass().getResource("/image/login.png")));
         player2PokemonImageLabel.setBounds(520, 10, 258, 232); // 위치와 크기 조정
         getContentPane().add(player2PokemonImageLabel);
+        
+        updatePokemonImages(player.getPokemon().getName(), client.getEnemyPokemon());
 
         // HP 바 
         player1HPBar = new JProgressBar(0, 100);
@@ -116,6 +121,29 @@ public class PokemonBattleGUI extends JFrame implements ActionListener{
 
         // 이벤트 리스너 및 게임 로직은
         }
+    private void updatePokemonImages(String myPokemon, String enemyPokemon) {
+    	// 내 포켓몬 이미지 업데이트
+        String myImagePath = "/image/" + myPokemon + ".png";
+        URL myImageResource = getClass().getResource(myImagePath);
+        if (myImageResource != null) {
+            ImageIcon myImageIcon = new ImageIcon(myImageResource);
+            player1PokemonImageLabel.setIcon(myImageIcon);
+        } else {
+            System.err.println("Image not found: " + myImagePath);
+        }
+
+        // 상대 포켓몬 이미지 업데이트
+        String enemyImagePath = "/image/" + enemyPokemon + ".png";
+        URL enemyImageResource = getClass().getResource(enemyImagePath);
+        if (enemyImageResource != null) {
+            ImageIcon enemyImageIcon = new ImageIcon(enemyImageResource);
+            player2PokemonImageLabel.setIcon(enemyImageIcon);
+        } else {
+            System.err.println("Image not found: " + enemyImagePath);
+        }
+        
+    }
+    
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

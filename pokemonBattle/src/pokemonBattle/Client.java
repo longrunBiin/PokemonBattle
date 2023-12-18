@@ -36,7 +36,7 @@ public class Client {
     Selectroom selectRoom;
     PokemonBattleGUI battleRoom;
     
-    String myPokemon, yourPokemon;
+    String myPokemon, enemyPokemon;
     private Player player;
     
     public Client() {
@@ -142,8 +142,9 @@ public class Client {
                 System.out.println("배틀룸 연결 ");
             	});
     	}else if (message.startsWith("ENEMY")) {
-    		yourPokemon = message.split(":")[1];
-    		out.println("mine : " + myPokemon + " yours : " + yourPokemon); //플레이어 준비 완료 시 전송
+    		enemyPokemon = message.split(":")[1];
+    		out.println("mine : " + myPokemon + " yours : " + enemyPokemon); //플레이어 준비 완료 시 전송
+    		System.out.println("Received enemy pokemon: " + enemyPokemon); // 디버깅 출력
     	}else {
         	// 다른 메시지 처리
             //appendText("����: " + message + "\n");
@@ -151,6 +152,9 @@ public class Client {
         }
      }
     
+    public String getEnemyPokemon() {
+        return enemyPokemon;
+    }
     
     public Selectroom getSelectRoom() {
     	return selectRoom; 

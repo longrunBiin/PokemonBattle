@@ -156,8 +156,8 @@ public class Server {
         }
         
         private void sendEnemyPokemon(String message) {
-            	clients.get(0).sendMessage("ENEMY : " + pokemon2);
-            	clients.get(1).sendMessage("ENEMY : "+ pokemon1);
+            	clients.get(0).sendMessage("ENEMY :"+ pokemon2);
+            	clients.get(1).sendMessage("ENEMY :"+ pokemon1);
           
         }
         
