@@ -162,18 +162,18 @@ public class Client {
     	return selectRoom; 
     }
     public void useSkill(String skillName) {
-        Player player = getPlayer(); // 현재 플레이어 객체 가져오기
+        Player player =selectRoom.getPlayer(); // 현재 플레이어 객체 가져오기
         int damage = player.getPokemon().useSkill(skillName); // 데미지 계산
 
         sendDamageToServer(damage); // 서버에 데미지 전송
     }
     private void sendDamageToServer(int damage) {
-        try {
-            out.writeObject("SKILL_DAMAGE:" + damage);
-            out.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            out.writeObject("SKILL_DAMAGE:" + damage);
+//            out.flush();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
     
 
