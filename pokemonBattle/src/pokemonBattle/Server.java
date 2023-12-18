@@ -101,7 +101,7 @@ public class Server {
                         sendToAll(message);
                     }
                     else if (message.startsWith("PLAYER:")) {
-                    	String playerPokemon = message.substring(playerIndex).split(":")[1];
+                    	String playerPokemon = message.substring(playerIndex).split(":")[1].split("H")[0];
                         String clientId = message.split(":")[1].split("P")[0];
                         String hp = message.substring(message.indexOf("HP:") + 3);
 
@@ -123,6 +123,17 @@ public class Server {
                         String clientId = message.split(":")[1].split("d")[0];
                         String damage = message.split("=")[1];
                         System.out.println("clientId = " + clientId + " damage = " + damage);
+                        if(clientId.equals("Client1")) {
+                        	int hp = Integer.parseInt(pokemonHP2) - Integer.parseInt(damage);
+                        	pokemonHP2 = Integer.toString(hp);
+                        }
+                        else {
+                        	int hp = Integer.parseInt(pokemonHP1) - Integer.parseInt(damage);
+                        	pokemonHP1 = Integer.toString(hp);
+                        }
+                        System.out.println(" pokemonHP1 = " + pokemonHP1 + " pokemonHP2 = " + pokemonHP2);
+                        if(pokemon1 != null && pokemon2 != null)
+                        	sendEnemyPokemon(message);   
                     }
 //                    
                   }
@@ -165,8 +176,10 @@ public class Server {
         }
         
         private void sendEnemyPokemon(String message) {
-            	clients.get(0).sendMessage("ENEMY :" + pokemon2 + pokemonHP2);
-            	clients.get(1).sendMessage("ENEMY :"+ pokemon1 + pokemonHP1);
+            	clients.get(0).sendMessage("ENEMY :" + pokemon2 + ":hp=" + pokemonHP2);
+            	clients.get(0).sendMessage("MINE :" + pokemonHP1);
+            	clients.get(1).sendMessage("ENEMY :"+ pokemon1 + ":hp=" +pokemonHP1);
+            	clients.get(1).sendMessage("MINE :" + pokemonHP2);
           
         }
         

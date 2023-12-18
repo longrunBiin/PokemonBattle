@@ -36,7 +36,7 @@ public class Client {
     Selectroom selectRoom;
     PokemonBattleGUI battleRoom;
     
-    String myPokemon, enemyPokemon;
+    String myPokemon, enemyPokemon, myHp, enemyHp;
     private Player player;
     
     public Client() {
@@ -142,15 +142,25 @@ public class Client {
                 System.out.println("배틀룸 연결 ");
             	});
     	}else if (message.startsWith("ENEMY")) {
-    		enemyPokemon = message.split(":")[1];
-    		out.println("mine : " + myPokemon + " yours : " + enemyPokemon); //플레이어 준비 완료 시 전송
-    	}else {
+    		enemyPokemon = message.split(":")[1].split(":")[0];
+    		enemyHp = message.split("=")[1];
+    		System.out.println("enemy HP= " + enemyHp);
+
+    	}else if (message.startsWith("MINE")) {
+    		myHp = message.split(":")[1];
+    		System.out.println("myHp = " + myHp);
+    		
+    	}
+    	else {
         	// 다른 메시지 처리
             //appendText("����: " + message + "\n");
         
         }
      }
     
+    public String getEnemyPokemon() {
+        return enemyPokemon;
+    }
     
     public Selectroom getSelectRoom() {
     	return selectRoom; 
