@@ -7,7 +7,10 @@ import java.util.List;
 import pokemon.Pokemon;
 
 public class Player implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	Pokemon pokemon;
+	List<String> skillnames;
 
 	public Player(Pokemon pokemon) {
 		this.pokemon = pokemon;
@@ -18,7 +21,7 @@ public class Player implements Serializable {
 	}
 
 	public List<String> getPokemonSkill() {
-		List<String> skillnames = pokemon.getSkillname(); //직렬화되지 않으므로 에러 발생 가능
+		skillnames = pokemon.getSkillname(); //직렬화되지 않으므로 에러 발생 가능
 		return skillnames;
 	}
 

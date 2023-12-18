@@ -122,11 +122,9 @@ public class Selectroom extends JFrame implements ActionListener{
 				client.sendBattleReadyStatus();
 				try {
 					client.sendPlayerReady();
-					System.out.println("SUCCESS");
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-					System.out.println("ERROR");
+					e1.printStackTrace();
 				}
 				System.out.println("player ready");
 			}

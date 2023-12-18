@@ -12,6 +12,8 @@ import game.Player;
 public class Server {
     private static List<ClientHandler> clients = new ArrayList<>();
     private static int clientIDCounter = 0; // 고유 ID 카운터
+    private static String pokemon1;
+    private static String pokemon2;
 
     public static void main(String[] args) {
         try {
@@ -43,10 +45,6 @@ public class Server {
         private boolean isReady = false; //준비 상태 추적
         private boolean battleIsReady = false;
         
-        InputStream is;
-        OutputStream os;
-        ObjectInputStream ois;
-        ObjectOutputStream oos;
         
         private List<Player> players = new ArrayList<>();
         
@@ -54,13 +52,12 @@ public class Server {
         	this.clientID = clientID;
             try {
                 this.clientSocket = socket;
+                
                 reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 writer = new PrintWriter(clientSocket.getOutputStream(), true);
                 
-                is = clientSocket.getInputStream();
-//    			os = socket.getOutputStream();
                 
-//    			oos = new ObjectOutputStream(os);
+
                 
                 writer.println("ID:" + clientID); // 클라이언트에 ID 전송                              
                 clientName = reader.readLine();
@@ -74,6 +71,7 @@ public class Server {
         public void run() {
             try {
                 while (true) {
+                	
                     String message = reader.readLine();
                     if (message == null) {
                         break;
@@ -84,6 +82,7 @@ public class Server {
                     sendToAll(message);
                     
                     
+                    int playerIndex = message.indexOf("POKEMON:");
                     if (message.startsWith("READY:")) {
                         String clientId = message.split(":")[1];
                         if (clientId.equals(this.clientID)) {
@@ -101,17 +100,22 @@ public class Server {
                         sendToAll(message);
                     }
                     else if (message.startsWith("PLAYER:")) {
-                        String clientId = message.split(":")[1];
-                        if (clientId.equals(this.clientID)) {
-                        	ois = new ObjectInputStream(is);
-                        	Player player = (Player)ois.readObject();
-                            players.add(clientIDCounter, player);
-                            System.out.println("player received " + clientIDCounter + " " + player.getPokemon().getName());
-                            for (ClientHandler client : clients) {
-                                client.sendMessage("PLAYER_MATCH");
-                            }
-                        }
+                    	String playerPokemon = message.substring(playerIndex).split(":")[1];
+                        String clientId = message.split(":")[1].split("P")[0];
+
+                        System.out.println("clientId = " + clientId + " playerId = " + playerPokemon);
+                        if(clientId.equals("Client1"))
+                        	pokemon1 = playerPokemon;
+                        else
+                        	pokemon2 = playerPokemon;
+                        System.out.println("pokemon1 = " + pokemon1 + " pokemon2 = " + pokemon2);
                         sendToAll(message);
+                        
+                        if ("Client1".equals(this.clientID))
+                        	clients.get(0).sendMessage("enemy's Pokemon = "+pokemon2);
+                        else
+                        	clients.get(1).sendMessage("enemy's Pokemon = "+pokemon1);
+                        	
                     }
 //                    
 //                    
@@ -121,10 +125,7 @@ public class Server {
                     System.out.println("클라이언트 [" + clientName + "] 연결이 끊어졌습니다.");
                     e.printStackTrace();
                     
-                } catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                } 
             
         }
         

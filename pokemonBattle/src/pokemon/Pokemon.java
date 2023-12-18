@@ -10,6 +10,8 @@ import skills.Skills;
 import type.Type;
 
 public abstract class Pokemon implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 	PokemonModel model;
 	List<Skills> skills = matchSkills();
 

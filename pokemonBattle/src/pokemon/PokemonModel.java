@@ -7,6 +7,8 @@ import skills.Skills;
 import type.Type;
 
 public class PokemonModel implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 	public String name;
     public int health;
     Enum<Type> type;

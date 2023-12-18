@@ -36,7 +36,7 @@ public class Client {
     Selectroom selectRoom;
     PokemonBattleGUI battleRoom;
     
-    Pokemon myPokemon, yourPokemon;
+    String myPokemon, yourPokemon;
     private Player player;
     
     public Client() {
@@ -64,11 +64,7 @@ public class Client {
             out.println(username);
             
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            
-            os = socket.getOutputStream();
-			//is = socket.getInputStream();
-			
-			//ois = new ObjectInputStream(is);
+           
 
             SwingWorker<Void, String> worker = new SwingWorker<Void, String>() {
                 @Override
@@ -108,17 +104,15 @@ public class Client {
     public void sendPlayerReady() throws IOException {
     	 Player player = selectRoom.getPlayer();
 		    if (player != null) {
-    	 try {
-    		 System.out.println("SUCCESS   GGG");
-    		oos = new ObjectOutputStream(os);
-			oos.writeObject(player);
-			oos.flush();
-			out.println("PLAYER:" + thisPlayerID); //플레이어 준비 완료 시 전송 
-			System.out.println("player send " + selectRoom.getPlayer().getPokemon().getName());    
-    		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		    	String mypokemon = player.getPokemon().getName();
+		    	
+		    	out.println("PLAYER:" + thisPlayerID + "POKEMON:" + mypokemon); //플레이어 준비 완료 시 전송
+				  
    	 }
+		    else {
+		    	 System.out.println("No Player");
+		    	
+		    }
     }
     
     
@@ -150,7 +144,7 @@ public class Client {
     	}else if (message.equals("PLAYER_MATCH")) {
 //             다른 플레이어의 선택한 포켓몬 정보를 수신
             Player player = (Player)ois.readObject();
-            System.out.println("player received " + player.getPokemon().getName());
+            out.println("player received " + player.getPokemon().getName());
 
 //             해당 플레이어 정보를 UI에 표시
 //            selectRoom.updatePlayerInfo(player);
