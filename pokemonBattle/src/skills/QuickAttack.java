@@ -9,8 +9,9 @@ public class QuickAttack extends Skills{
 	}
 
 	@Override
-	public void useSkill() {
+	public int useSkill() {
 		System.out.println("use quicjAttack " + name + type + damage);
+		return damage;
 		
 	}
 }

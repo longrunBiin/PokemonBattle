@@ -29,15 +29,25 @@ public class Charmander extends Pokemon{//파이리
 	}
 
 	@Override
-	public void useSkill(String skillName) {
+	public int useSkill(String skillName) {
+		int damage = 0;
 		switch(skillName) {
-		case "1" : model.skills.get(0).useSkill(); break;
-		case "2" : model.skills.get(1).useSkill(); break;
-		case "3" : model.skills.get(2).useSkill(); break;
-		case "4" : model.skills.get(3).useSkill(); break;
-		}
-	}
+        case "1":
+            damage = model.skills.get(0).useSkill();
+            break;
+        case "2":
+            damage = model.skills.get(1).useSkill();
+            break;
+        case "3":
+            damage = model.skills.get(2).useSkill();
+            break;
+        case "4":
+            damage = model.skills.get(3).useSkill();
+            break;
+        
+    }
+    return damage;
 
 	
-
+	}
 }

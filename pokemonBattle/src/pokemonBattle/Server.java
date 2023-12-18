@@ -159,6 +159,16 @@ public class Server {
                 }
             }
         }
+        
+        private void handleClientMessage(Object message) {
+            String msg = (String) message;
+            if (msg.startsWith("SKILL_DAMAGE:")) {
+                int damage = Integer.parseInt(msg.split(":")[1]);
+                // 데미지 처리 로직...
+            }
+            // 기타 메시지 처리...
+        } 
+        
 
         private void sendMessage(String message) {
             writer.println(message);

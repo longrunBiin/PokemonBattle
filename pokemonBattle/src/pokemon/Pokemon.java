@@ -13,7 +13,7 @@ public abstract class Pokemon implements Serializable{
 	PokemonModel model;
 	List<Skills> skills = matchSkills();
 
-    public abstract void useSkill(String skillName);
+    public abstract int useSkill(String skillName);
     
     public abstract List<Skills> matchSkills();
     
