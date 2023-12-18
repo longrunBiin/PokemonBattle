@@ -30,7 +30,9 @@ public abstract class Pokemon implements Serializable{
     public int getDefense() {
     	return model.defense;
     }
-    
+    public int getHp() {
+    	return model.health;
+    }
     public int getSkillDamage() {
     	return skills.get(0).getDamage();
     }

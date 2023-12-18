@@ -36,7 +36,7 @@ public class Client {
     Selectroom selectRoom;
     PokemonBattleGUI battleRoom;
     
-    String myPokemon, yourPokemon;
+    String myPokemon, enemyPokemon;
     private Player player;
     
     public Client() {
@@ -105,8 +105,8 @@ public class Client {
     	 Player player = selectRoom.getPlayer();
 		    if (player != null) {
 		    	myPokemon = player.getPokemon().getName();
-		    	
-		    	out.println("PLAYER:" + thisPlayerID + "POKEMON:" + myPokemon); //플레이어 준비 완료 시 전송
+		    	String hp = Integer.toString(player.getPokemon().getHp());
+		    	out.println("PLAYER:" + thisPlayerID + "POKEMON:" + myPokemon + "HP:" + hp); //플레이어 준비 완료 시 전송
 				  
    	 }
 		    else {
@@ -142,8 +142,8 @@ public class Client {
                 System.out.println("배틀룸 연결 ");
             	});
     	}else if (message.startsWith("ENEMY")) {
-    		yourPokemon = message.split(":")[1];
-    		out.println("mine : " + myPokemon + " yours : " + yourPokemon); //플레이어 준비 완료 시 전송
+    		enemyPokemon = message.split(":")[1];
+    		out.println("mine : " + myPokemon + " yours : " + enemyPokemon); //플레이어 준비 완료 시 전송
     	}else {
         	// 다른 메시지 처리
             //appendText("����: " + message + "\n");
@@ -162,12 +162,7 @@ public class Client {
         sendDamageToServer(damage); // 서버에 데미지 전송
     }
     private void sendDamageToServer(int damage) {
-//        try {
-//            out.writeObject("SKILL_DAMAGE:" + damage);
-//            out.flush();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+    	out.println("DAMAGE:" + thisPlayerID + "damage="+damage);
     }
     
 

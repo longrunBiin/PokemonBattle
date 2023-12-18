@@ -120,13 +120,13 @@ public class PokemonBattleGUI extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()== skill1) {
-			player.useSkill("1");
+			client.useSkill("1");
 		}else if(e.getSource()==skill2) {
-			player.useSkill("2");
+			client.useSkill("2");
 		}else if(e.getSource()==skill3) {
-			player.useSkill("3");
+			client.useSkill("3");
 		}else if(e.getSource()==skill4) {
-			player.useSkill("4");
+			client.useSkill("4");
 		}
 		
 	}

@@ -12,8 +12,8 @@ import game.Player;
 public class Server {
     private static List<ClientHandler> clients = new ArrayList<>();
     private static int clientIDCounter = 0; // 고유 ID 카운터
-    private static String pokemon1;
-    private static String pokemon2;
+    private static String pokemon1, pokemonHP1;
+    private static String pokemon2, pokemonHP2;
 
     public static void main(String[] args) {
         try {
@@ -83,6 +83,7 @@ public class Server {
                     
                     
                     int playerIndex = message.indexOf("POKEMON:");
+                    
                     if (message.startsWith("READY:")) {
                         String clientId = message.split(":")[1];
                         if (clientId.equals(this.clientID)) {
@@ -102,19 +103,27 @@ public class Server {
                     else if (message.startsWith("PLAYER:")) {
                     	String playerPokemon = message.substring(playerIndex).split(":")[1];
                         String clientId = message.split(":")[1].split("P")[0];
+                        String hp = message.substring(message.indexOf("HP:") + 3);
 
-                        System.out.println("clientId = " + clientId + " playerId = " + playerPokemon);
-                        if(clientId.equals("Client1"))
+                        System.out.println("clientId = " + clientId + " playerId = " + playerPokemon + " hp = " + hp);
+                        if(clientId.equals("Client1")) {
                         	pokemon1 = playerPokemon;
-                        else
+                        	pokemonHP1 = hp;
+                        }
+                        else {
                         	pokemon2 = playerPokemon;
-                        System.out.println("pokemon1 = " + pokemon1 + " pokemon2 = " + pokemon2);
+                        	pokemonHP2 = hp;
+                        }
+                        System.out.println("pokemon1 = " + pokemon1 + " pokemonHP1 = " + pokemonHP1 + " pokemon2 = " + pokemon2 + " pokemonHP2 = " + pokemonHP2);
                         
                         if(pokemon1 != null && pokemon2 != null)
-                        	sendEnemyPokemon(message);
-                        	
+                        	sendEnemyPokemon(message);                        	
                     }
-//                    
+                    else if (message.startsWith("DAMAGE:")) {
+                        String clientId = message.split(":")[1].split("d")[0];
+                        String damage = message.split("=")[1];
+                        System.out.println("clientId = " + clientId + " damage = " + damage);
+                    }
 //                    
                   }
                 } 
@@ -156,8 +165,8 @@ public class Server {
         }
         
         private void sendEnemyPokemon(String message) {
-            	clients.get(0).sendMessage("ENEMY : " + pokemon2);
-            	clients.get(1).sendMessage("ENEMY : "+ pokemon1);
+            	clients.get(0).sendMessage("ENEMY :" + pokemon2 + pokemonHP2);
+            	clients.get(1).sendMessage("ENEMY :"+ pokemon1 + pokemonHP1);
           
         }
         
