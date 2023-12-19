@@ -7,9 +7,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import game.Player;
+import pokemon.Bulbasaur;
 import pokemon.Charmander;
 import pokemon.Pikachu;
 import pokemon.Pokemon;
+import pokemon.Squirtle;
 
 import java.awt.FlowLayout;
 import javax.swing.JToolBar;
@@ -29,14 +31,17 @@ public class Selectroom extends JFrame implements ActionListener{
 	private JPanel contentPane;
 	
 	JButton pikachuButton;
-	JButton charmanderButton
-	;
+	JButton charmanderButton;
+	JButton squirtleButton;
+	JButton bulbasaurButton;
 	private Client client;
 
 	Player player;
 	Pokemon myPokemon;
 	Pokemon pikachu = new Pikachu();
 	Pokemon charmander = new Charmander();
+	Pokemon squirtle = new Squirtle();
+	Pokemon bulbasaur = new Bulbasaur();
 	/**
 	 * Launch the application.
 	 */
@@ -66,15 +71,7 @@ public class Selectroom extends JFrame implements ActionListener{
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-//		ImageIcon pikachuIcon = new ImageIcon(getClass().getResource("/image/Pikachu_front.png"));
-//		pikachuButton.setIcon(pikachuIcon);
-//		pikachuButton = new JButton("PIKACHU", pikachuIcon);
-//		pikachuButton.setVerticalTextPosition(SwingConstants.BOTTOM);
-//		pikachuButton.setHorizontalTextPosition(SwingConstants.CENTER);
-//		pikachuButton = new JButton("PIKACHU");
-//		pikachuButton.setBounds(10, 69, 190, 210);
-//		contentPane.add(pikachuButton);
+
 		
 		// 이미지 아이콘 생성
 		ImageIcon pikachuIcon = new ImageIcon(getClass().getResource("/image/Pikachu_front.png"));
@@ -87,31 +84,41 @@ public class Selectroom extends JFrame implements ActionListener{
 		pikachuButton.setHorizontalTextPosition(SwingConstants.CENTER);
 
 		// 버튼 위치 및 크기 설정
-		pikachuButton.setBounds(10, 69, 190, 229);
+		pikachuButton.setBounds(10, 69, 138, 225);
 
 		// 콘텐츠 팬에 버튼 추가
 		contentPane.add(pikachuButton);
-
-		
-//		charmanderButton = new JButton("CHARMANDER");
-//		charmanderButton.setBounds(247, 69, 190, 210);
-//		contentPane.add(charmanderButton);
 		
 		// 차맨더 이미지 아이콘 생성
 		ImageIcon charmanderIcon = new ImageIcon(getClass().getResource("/image/CHARMANDER_front.png"));
-
-		// 버튼 생성과 동시에 아이콘과 텍스트 설정
 		charmanderButton = new JButton("CHARMANDER", charmanderIcon);
-
-		// 텍스트 위치 설정
 		charmanderButton.setVerticalTextPosition(SwingConstants.BOTTOM);
 		charmanderButton.setHorizontalTextPosition(SwingConstants.CENTER);
-
-		// 버튼 위치 및 크기 설정
-		charmanderButton.setBounds(247, 69, 190, 229);
-
-		// 콘텐츠 팬에 버튼 추가
+		charmanderButton.setBounds(174, 69, 149, 225);
 		contentPane.add(charmanderButton);
+		
+		// 꼬북이 생성
+		ImageIcon squirtleIcon = new ImageIcon(getClass().getResource("/image/SQUIRTLE.png"));		
+		squirtleButton = new JButton("SQUIRTLE", squirtleIcon);	
+		squirtleButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+		squirtleButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		squirtleButton.setBounds(350, 69, 149, 225);		
+		contentPane.add(squirtleButton);
+		
+		//이상해씨 생성
+		ImageIcon bulbasaurIcon = new ImageIcon(getClass().getResource("/image/BULBASAUR.png"));		
+		bulbasaurButton = new JButton("BULBASAUR", bulbasaurIcon);
+		bulbasaurButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+		bulbasaurButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		bulbasaurButton.setBounds(522, 69, 156, 225);
+		contentPane.add(bulbasaurButton);
+		
+		
+		
+		pikachuButton.addActionListener(this);
+		charmanderButton.addActionListener(this);
+		squirtleButton.addActionListener(this);
+		bulbasaurButton.addActionListener(this);
 
 		
 		
@@ -133,16 +140,7 @@ public class Selectroom extends JFrame implements ActionListener{
 		contentPane.add(btnNewButton_2);
 		
 
-		JButton btnNewButton_1_1 = new JButton("POKEMON2");
-		btnNewButton_1_1.setBounds(488, 69, 190, 229);
-		contentPane.add(btnNewButton_1_1);
 		
-		pikachuButton.addActionListener(this);
-		charmanderButton.addActionListener(this);
-		
-		JButton btnNewButton_3 = new JButton("POKEMON3");
-		btnNewButton_3.setBounds(488, 69, 190, 210);
-		contentPane.add(btnNewButton_3);
 	}
 
 	@Override
@@ -153,10 +151,14 @@ public class Selectroom extends JFrame implements ActionListener{
 		}else if(e.getSource()==charmanderButton) {
 			myPokemon = charmander;
 			System.out.println("charmander select");
+		}else if(e.getSource()==squirtleButton) {
+			myPokemon = charmander;
+			System.out.println("squirtle select");
 		}
-
-		
-		
+		else if(e.getSource()==bulbasaurButton) {
+			myPokemon = charmander;
+			System.out.println("bulbasaur select");
+			}
 
 	}
 	public Player getPlayer() {
