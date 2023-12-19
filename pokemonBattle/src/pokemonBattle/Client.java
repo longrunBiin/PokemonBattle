@@ -134,23 +134,20 @@ public class Client {
     	}
     	else if(message.equals("BATTLE_START")) {
         	EventQueue.invokeLater(() -> {
-        		PokemonBattleGUI battleRoom = new PokemonBattleGUI(this, selectRoom.getPlayer());
+        		battleRoom = new PokemonBattleGUI(this, selectRoom.getPlayer());
                 battleRoom.setVisible(true);
                 selectRoom.setVisible(false);
                
                 System.out.println("배틀룸 연결 ");
             	});
-    	}else if (message.startsWith("ENEMY")) {
+    	}
+    	else if (message.startsWith("ENEMY:")) {
     		enemyPokemon = message.split(":")[1].split(":")[0];
-    		enemyHp = message.split("=")[1];
-    		System.out.println("enemy HP= " + enemyHp);
-    		battleRoom.updateHP(myHp, enemyHp);
-
-
-    	}else if (message.startsWith("MINE")) {
-    		myHp = message.split(":")[1];
-    		System.out.println("myHp = " + myHp);
-    		battleRoom.updateHP(myHp, enemyHp);
+    		enemyHp = message.split("=")[1].split(":")[0];
+    		myHp = message.split(":myHp=")[1];
+    		System.out.println("enemy HP=" + enemyHp + " myHp =" + myHp);
+    		if(battleRoom !=null)
+    			battleRoom.updateHP(myHp, enemyHp);
     	}
     	else {
         	// 다른 메시지 처리
@@ -174,7 +171,7 @@ public class Client {
         Pokemon enemy = enemyToPokemon(enemyPokemon);
         GameLogic logic = new GameLogic(skills.get(skillIndex-1), enemy);
         int damage = logic.calculateDamage(mine, enemy); // 데미지 계산
-        	
+        System.out.println(damage);
         sendDamageToServer(damage); // 서버에 데미지 전송
     }
     
@@ -198,18 +195,6 @@ public class Client {
 
 	public static void main(String[] args) {
         SwingUtilities.invokeLater(Client::new);
-        
-		
-//		player1.useSkill("1");
-//		player2.useSkill("1");
-//		
-//		poke.useSkill("1");
-//		poke2.useSkill("1");
-//		poke.useSkill("2");
-//		poke2.useSkill("2");
-		
-		//GameLogic logic = new GameLogic(poke, poke2);
-		
-		//System.out.println(logic.calculateDamage(poke, poke2));
+ 
     }
 }

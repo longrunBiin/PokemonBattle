@@ -145,10 +145,11 @@ public class PokemonBattleGUI extends JFrame implements ActionListener{
     }
     
     public void updateHP(String myHp, String enemyHp) {
+    	System.out.println("updateHP : ");
         // HP 레이블 업데이트
         player1PokemonHP.setText(myHp + " / 100");
         player2PokemonHP.setText(enemyHp + " / 100");
-
+       System.out.println("updateHP : " + myHp + " " + enemyHp);
         // HP 바 업데이트
         try {
             int myHpInt = Integer.parseInt(myHp);

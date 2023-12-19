@@ -124,14 +124,18 @@ public class Server {
                         if(clientId.equals("Client1")) {
                         	int hp = Integer.parseInt(pokemonHP2) - Integer.parseInt(damage);
                         	pokemonHP2 = Integer.toString(hp);
+                        	this.sendMessage("ENEMY:" + pokemon2 + ":enemyHp=" + pokemonHP2 + ":myHp=" + pokemonHP1);
+
+                        	
                         }
                         else {
                         	int hp = Integer.parseInt(pokemonHP1) - Integer.parseInt(damage);
                         	pokemonHP1 = Integer.toString(hp);
+                        	this.sendMessage("ENEMY:" + pokemon1 + ":enemyHp=" + pokemonHP1 + ":myHp=" + pokemonHP2);
                         }
                         System.out.println(" pokemonHP1 = " + pokemonHP1 + " pokemonHP2 = " + pokemonHP2);
-                        if(pokemon1 != null && pokemon2 != null)
-                        	sendEnemyPokemon(message);   
+//                  
+                        sendToAll(message);
                     }
 //                    
                   }
@@ -174,22 +178,13 @@ public class Server {
         }
         
         private void sendEnemyPokemon(String message) {
-            	clients.get(0).sendMessage("ENEMY :" + pokemon2 + ":hp=" + pokemonHP2);
-            	clients.get(0).sendMessage("MINE :" + pokemonHP1);
-            	clients.get(1).sendMessage("ENEMY :"+ pokemon1 + ":hp=" +pokemonHP1);
-            	clients.get(1).sendMessage("MINE :" + pokemonHP2);
+        	System.out.println(clients.get(0).clientID + " ENEMY:" + pokemon2 + ":enemyHp=" + pokemonHP2 + ":myHp=" + pokemonHP1);
+        	System.out.println(clients.get(1).clientID + " ENEMY:" + pokemon1 + ":enemyHp=" + pokemonHP1 + ":myHp=" + pokemonHP2);
+            clients.get(0).sendMessage("ENEMY:" + pokemon2 + ":enemyHp=" + pokemonHP2 + ":myHp=" + pokemonHP1);
+            clients.get(1).sendMessage("ENEMY:" + pokemon1 + ":enemyHp=" + pokemonHP1 + ":myHp=" + pokemonHP2);
           
         }
-        
-        private void handleClientMessage(Object message) {
-            String msg = (String) message;
-            if (msg.startsWith("SKILL_DAMAGE:")) {
-                int damage = Integer.parseInt(msg.split(":")[1]);
-                // 데미지 처리 로직...
-            }
-            // 기타 메시지 처리...
-        } 
-        
+      
 
         private void sendMessage(String message) {
             writer.println(message);
