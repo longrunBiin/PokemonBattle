@@ -3,11 +3,13 @@ package pokemon;
 import java.util.ArrayList;
 import java.util.List;
 
+import skills.AquaTail;
 import skills.DragonRage;
 import skills.Flamethrower;
 import skills.Scratch;
 import skills.Skills;
 import skills.Tackle;
+import skills.WaterGun;
 import type.Type;
 
 public class Squirtle extends Pokemon{ //꼬북이
@@ -20,8 +22,8 @@ public class Squirtle extends Pokemon{ //꼬북이
 	@Override
 	public List<Skills> matchSkills() {
 		List<Skills> skill = new ArrayList();
-		skill.add(new DragonRage());
-		skill.add(new Flamethrower());
+		skill.add(new WaterGun());
+		skill.add(new AquaTail());
 		skill.add(new Tackle());
 		skill.add(new Scratch());
 		return skill;
