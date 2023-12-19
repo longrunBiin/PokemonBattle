@@ -28,12 +28,7 @@ public class Client {
     private PrintWriter out;
     private BufferedReader in;
     private String thisPlayerID;
-    
-    OutputStream os;
-	InputStream is;
-	ObjectOutputStream oos;
-	ObjectInputStream ois;
-    
+
     Selectroom selectRoom;
     PokemonBattleGUI battleRoom;
     

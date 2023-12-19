@@ -55,9 +55,7 @@ public class Server {
                 
                 reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 writer = new PrintWriter(clientSocket.getOutputStream(), true);
-                
-                
-
+               
                 
                 writer.println("ID:" + clientID); // 클라이언트에 ID 전송                              
                 clientName = reader.readLine();

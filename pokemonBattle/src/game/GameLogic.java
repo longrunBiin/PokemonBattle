@@ -9,9 +9,9 @@ public class GameLogic {
 	Pokemon pokemon;
 	Skills skill;
 	int damage;
-	int level = 50;
+	int level = 10;
 	int typeCompatibility = 1;
-	int random = (int) (((Math.random()*255) + 217) * 255) / 100;
+	int random = (int) (((Math.random()*100)) * 100) / 100;
 	
 	public GameLogic(Skills skill, Pokemon pokemon) {
 		this.pokemon = pokemon;
@@ -29,8 +29,8 @@ public class GameLogic {
 	}
 
 	public int calculateDamage(Pokemon pokemon1, Pokemon pokemon2) {
-		damage = (pokemon1.getAttack() * pokemon1.getSkillDamage() * (level * 2 / 5 + 2 ) / pokemon2.getDefense() /50 + 2)
-				* typeCompatibility * random;
+		damage = (pokemon1.getAttack() * pokemon1.getSkillDamage()/10 * (level / 5 + 2 ) / pokemon2.getDefense() /50 + 2)
+				* typeCompatibility * random/10;
 		
 		return damage;
 	}
