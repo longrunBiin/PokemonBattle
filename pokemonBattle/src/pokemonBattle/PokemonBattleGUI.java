@@ -96,11 +96,11 @@ public class PokemonBattleGUI extends JFrame implements ActionListener{
         skill2.setBounds(161, 10, 127, 85);
         panel.add(skill2);
         
-        skill3 = new JButton("skillNames.get(2)");
+        skill3 = new JButton(skillNames.get(2));
         skill3.setBounds(10, 105, 118, 85);
         panel.add(skill3);
         
-        skill4 = new JButton("skillNames.get(3)");
+        skill4 = new JButton(skillNames.get(3));
         skill4.setBounds(161, 105, 127, 85);
         panel.add(skill4);
         
