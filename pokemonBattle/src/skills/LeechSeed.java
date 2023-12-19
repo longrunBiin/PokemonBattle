@@ -5,7 +5,7 @@ import type.Type;
 public class LeechSeed extends Skills {
 
 	public LeechSeed() {
-		super("씨뿌리기", Type.GRASS, 5);
+		super("씨뿌리기", Type.GRASS, 30);
 	}
 	@Override
 	public int useSkill() {

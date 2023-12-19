@@ -5,7 +5,7 @@ import type.Type;
 public class RazorLeaf extends Skills{
 	
 	public RazorLeaf() {
-		super("잎날리기", Type.GRASS, 5);
+		super("잎날리기", Type.GRASS, 30);
 	}
 	@Override
 	public int useSkill() {

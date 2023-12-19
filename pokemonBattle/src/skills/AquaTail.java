@@ -5,7 +5,7 @@ import type.Type;
 public class AquaTail extends Skills{
 
 	public AquaTail() {
-		super("아쿠아테일", Type.WATER, 5);
+		super("아쿠아테일", Type.WATER, 30);
 	}
 	@Override
 	public int useSkill() {

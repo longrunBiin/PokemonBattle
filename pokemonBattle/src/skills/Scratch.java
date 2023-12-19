@@ -5,7 +5,7 @@ import type.Type;
 public class Scratch extends Skills{
 	
 	public Scratch() {
-		super("할퀴기", Type.NORMAL, 10);
+		super("할퀴기", Type.NORMAL, 30);
 	}
 
 	@Override

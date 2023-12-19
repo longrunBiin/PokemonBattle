@@ -5,7 +5,7 @@ import type.Type;
 public class WaterGun extends Skills{
 
 	public WaterGun() {
-		super("물수리검", Type.WATER, 5);
+		super("물수리검", Type.WATER, 15);
 	}
 	@Override
 	public int useSkill() {

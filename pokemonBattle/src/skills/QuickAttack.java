@@ -5,7 +5,7 @@ import type.Type;
 public class QuickAttack extends Skills{
 	
 	public QuickAttack() {
-		super("전광석화", Type.NORMAL, 10);
+		super("전광석화", Type.NORMAL, 30);
 	}
 
 	@Override
