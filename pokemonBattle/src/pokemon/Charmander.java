@@ -16,7 +16,7 @@ public class Charmander extends Pokemon{//파이리
 	
 	public Charmander() {
 		skills = matchSkills();
-		model = new PokemonModel("charmander", 200, Type.FIRE, skills, "", 50, 100);
+		model = new PokemonModel("charmander", 100, Type.FIRE, skills, "", 50, 100);
 	}
 
 	@Override

@@ -144,6 +144,24 @@ public class PokemonBattleGUI extends JFrame implements ActionListener{
         
     }
     
+    public void updateHP(String myHp, String enemyHp) {
+        // HP 레이블 업데이트
+        player1PokemonHP.setText(myHp + " / 100");
+        player2PokemonHP.setText(enemyHp + " / 100");
+
+        // HP 바 업데이트
+        try {
+            int myHpInt = Integer.parseInt(myHp);
+            player1HPBar.setValue(myHpInt);
+
+            int enemyHpInt = Integer.parseInt(enemyHp);
+            player2HPBar.setValue(enemyHpInt);
+        } catch (NumberFormatException e) {
+            System.err.println("Invalid HP format");
+        }
+    }
+
+    
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
