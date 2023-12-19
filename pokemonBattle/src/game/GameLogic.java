@@ -30,7 +30,7 @@ public class GameLogic {
 
 	public int calculateDamage(Pokemon pokemon1, Pokemon pokemon2) {
 		damage = (pokemon1.getAttack() * pokemon1.getSkillDamage()/10 * (level / 5 + 2 ) / pokemon2.getDefense() /50 + 2)
-				* typeCompatibility * random/10;
+				* typeCompatibility * random/5;
 		
 		return damage;
 	}

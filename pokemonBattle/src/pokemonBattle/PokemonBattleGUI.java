@@ -29,16 +29,6 @@ public class PokemonBattleGUI extends JFrame implements ActionListener{
     
     List<String> skillNames = new ArrayList<>();
 
-//    public static void main(String[] args) {
-//        EventQueue.invokeLater(() -> {
-//            try {
-//                PokemonBattleGUI frame = new PokemonBattleGUI();
-//                frame.setVisible(true);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        });
-//    }
 
     public PokemonBattleGUI(Client client, Player player) {
     	this.player = player;
@@ -145,7 +135,6 @@ public class PokemonBattleGUI extends JFrame implements ActionListener{
     }
     
     public void updateHP(String myHp, String enemyHp) {
-    	System.out.println("updateHP : ");
         // HP 레이블 업데이트
         player1PokemonHP.setText(myHp + " / 100");
         player2PokemonHP.setText(enemyHp + " / 100");
@@ -157,6 +146,58 @@ public class PokemonBattleGUI extends JFrame implements ActionListener{
 
             int enemyHpInt = Integer.parseInt(enemyHp);
             player2HPBar.setValue(enemyHpInt);
+            
+            if (myHpInt <= 0 || enemyHpInt <= 0) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        // 여기에 UI 업데이트 코드를 넣습니다.
+
+                        JFrame gameOverWindow = new JFrame("게임 종료");
+
+                        // 레이아웃 관리자를 BorderLayout으로 설정
+                        gameOverWindow.setLayout(new BorderLayout());
+
+                        // 중앙에 메시지 표시
+                        JLabel messageLabel = new JLabel("게임이 종료되었습니다.");
+                        messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                        gameOverWindow.add(messageLabel, BorderLayout.NORTH);
+
+                        // 아래쪽에 승패 표시
+                        JLabel winLabel;
+                        if (myHpInt <= 0) {
+                            winLabel = new JLabel("패배하셨습니다.");
+                        } else {
+                            winLabel = new JLabel("승리하셨습니다.");
+                        }
+                        winLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                        gameOverWindow.add(winLabel, BorderLayout.CENTER);
+
+                        // 아래쪽에 버튼 배치
+                        JButton closeButton = new JButton("창 닫기");
+                        closeButton.setAlignmentX(Component.CENTER_ALIGNMENT); // 수평 가운데 정렬
+                        gameOverWindow.add(closeButton, BorderLayout.SOUTH);
+
+                        // 창 크기 및 위치 설정
+                        gameOverWindow.setSize(300, 200);
+                        gameOverWindow.setLocationRelativeTo(null);
+
+                        // 버튼에 이벤트 리스너를 등록합니다.
+                        closeButton.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                // 창 닫기 버튼을 누르면 기존에 있던 JFrame도 닫힙니다.
+                                gameOverWindow.dispose();
+                                client.endGame();
+                            }
+                        });
+
+                        // 게임 종료 창을 보이게 합니다.
+                        gameOverWindow.setVisible(true);
+                    }
+                });
+            }
+
         } catch (NumberFormatException e) {
             System.err.println("Invalid HP format");
         }

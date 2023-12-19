@@ -72,12 +72,18 @@ public class Client {
                         }
                         publish(message);
                         processServerMessage(message);
+                        checkGame();
                         
                 }
                     return null;
                 }
 
-                @Override
+                private void checkGame() {
+//					if(myHp <=0 || enemyHp<= 0)
+					
+				}
+
+				@Override
                 protected void process(List<String> chunks) {
                     for (String message : chunks) {
                         waitroom.appendText("상대방: " + message + "\n");
@@ -197,4 +203,9 @@ public class Client {
         SwingUtilities.invokeLater(Client::new);
  
     }
+
+	public void endGame() {
+		battleRoom.setVisible(false);
+		battleRoom.dispose();
+	}
 }
