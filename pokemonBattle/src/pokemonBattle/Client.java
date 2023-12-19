@@ -7,9 +7,11 @@ import javax.swing.*;
 
 import game.GameLogic;
 import game.Player;
+import pokemon.Bulbasaur;
 import pokemon.Charmander;
 import pokemon.Pikachu;
 import pokemon.Pokemon;
+import pokemon.Squirtle;
 import skills.Skills;
 
 import java.awt.EventQueue;
@@ -186,8 +188,12 @@ public class Client {
     private Pokemon mineToPokemon(String myPokemon) {
     	if(myPokemon.equals("pikachu"))
 			return new Pikachu();
-	else if(myPokemon.equals("charmander"))
-		return new Charmander();
+    	else if(myPokemon.equals("charmander"))
+    		return new Charmander();
+    	else if(myPokemon.equals("bulbasaur"))
+    		return new Bulbasaur();
+    	else if(myPokemon.equals("squirtle"))
+    		return new Squirtle();
 	return null;
 	}
 
@@ -196,6 +202,10 @@ public class Client {
 				return new Pikachu();
 		else if(enemyPokemon.equals("charmander"))
 			return new Charmander();
+		else if(enemyPokemon.equals("bulbasaur"))
+    		return new Bulbasaur();
+    	else if(enemyPokemon.equals("squirtle"))
+    		return new Squirtle();
 		return null;
 	}
 

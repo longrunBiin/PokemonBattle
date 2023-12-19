@@ -152,13 +152,14 @@ public class Selectroom extends JFrame implements ActionListener{
 			myPokemon = charmander;
 			System.out.println("charmander select");
 		}else if(e.getSource()==squirtleButton) {
-			myPokemon = charmander;
+			myPokemon = squirtle;
 			System.out.println("squirtle select");
 		}
 		else if(e.getSource()==bulbasaurButton) {
-			myPokemon = charmander;
+			myPokemon = bulbasaur;
 			System.out.println("bulbasaur select");
 			}
+		
 
 	}
 	public Player getPlayer() {
