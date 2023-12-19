@@ -14,4 +14,8 @@ public class QuickAttack extends Skills{
 		return damage;
 		
 	}
+	@Override
+	public Enum<Type> getType() {
+		return Type.NORMAL;
+	}
 }

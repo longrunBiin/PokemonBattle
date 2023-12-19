@@ -13,6 +13,10 @@ public class Scratch extends Skills{
 		System.out.println("use scratch " + name + type + damage);
 		return damage;	
 	}
+	@Override
+	public Enum<Type> getType() {
+		return Type.NORMAL;
+	}
 }
 
 

@@ -13,4 +13,9 @@ public class DragonRage extends Skills{
 		System.out.println("use DragonRage " + name + type + damage);
 		return damage;
 	}
+
+	@Override
+	public Enum<Type> getType() {
+		return Type.DRAGON;
+	}
 }

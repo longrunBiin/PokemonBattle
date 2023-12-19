@@ -13,5 +13,8 @@ public class ThunderBolt extends Skills{
 		return damage;
 		
 	}
-
+	@Override
+	public Enum<Type> getType() {
+		return Type.ELECTRIC;
+	}
 }

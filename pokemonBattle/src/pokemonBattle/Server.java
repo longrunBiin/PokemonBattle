@@ -196,16 +196,7 @@ public class Server {
         private void sendMessage(String message) {
             writer.println(message);
         }
-        public GameLogic getGameLogic() {
-        	String clientId = clientID.split("t")[1];
-        	int id = Integer.parseInt(clientId);
-        	int id2;
-        	if(id==1) id2=2;
-        	else id2=1;
-        	
-        	GameLogic gameLogic = new GameLogic(players.get(id).getPokemon(), players.get(id2).getPokemon());
-        	return gameLogic;
-        }   
+        
     }
 }
 

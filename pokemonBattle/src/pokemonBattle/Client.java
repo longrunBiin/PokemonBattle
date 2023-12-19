@@ -10,6 +10,7 @@ import game.Player;
 import pokemon.Charmander;
 import pokemon.Pikachu;
 import pokemon.Pokemon;
+import skills.Skills;
 
 import java.awt.EventQueue;
 import java.awt.Point;
@@ -124,6 +125,9 @@ public class Client {
             waitroom.getInputBox().setText("");
         }
     }
+    private void sendDamageToServer(int damage) {
+    	out.println("DAMAGE:" + thisPlayerID + "damage="+damage);
+    }
     
     public void processServerMessage(String message) throws ClassNotFoundException, IOException {
     	if (message.equals("GAME_START")) {
@@ -167,16 +171,35 @@ public class Client {
     }
     public void useSkill(String skillName) {
         Player player =selectRoom.getPlayer(); // 현재 플레이어 객체 가져오기
-        int damage = player.getPokemon().useSkill(skillName); // 데미지 계산
-
+        List<Skills> skills = player.getPokemon().getSkills();
+        int skillIndex = Integer.parseInt(skillName);
+        Pokemon mine = mineToPokemon(myPokemon);
+        Pokemon enemy = enemyToPokemon(enemyPokemon);
+        GameLogic logic = new GameLogic(skills.get(skillIndex-1), enemy);
+        int damage = logic.calculateDamage(mine, enemy); // 데미지 계산
+        	
         sendDamageToServer(damage); // 서버에 데미지 전송
     }
-    private void sendDamageToServer(int damage) {
-    	out.println("DAMAGE:" + thisPlayerID + "damage="+damage);
-    }
+    
     
 
-    public static void main(String[] args) {
+    private Pokemon mineToPokemon(String myPokemon) {
+    	if(myPokemon.equals("pikachu"))
+			return new Pikachu();
+	else if(myPokemon.equals("charmander"))
+		return new Charmander();
+	return null;
+	}
+
+	private Pokemon enemyToPokemon(String enemyPokemon) {
+		if(enemyPokemon.equals("pikachu"))
+				return new Pikachu();
+		else if(enemyPokemon.equals("charmander"))
+			return new Charmander();
+		return null;
+	}
+
+	public static void main(String[] args) {
         SwingUtilities.invokeLater(Client::new);
         
 		

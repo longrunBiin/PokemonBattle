@@ -1,32 +1,34 @@
 package game;
 
 import pokemon.Pokemon;
+import skills.Skills;
 import type.Type;
 import type.TypeFactory;
 
 public class GameLogic {
-	Pokemon pokemon1, pokemon2;
-	double damage;
+	Pokemon pokemon;
+	Skills skill;
+	int damage;
 	int level = 50;
-	double typeCompatibility = 1.0;
+	int typeCompatibility = 1;
 	int random = (int) (((Math.random()*255) + 217) * 255) / 100;
 	
-	public GameLogic(Pokemon pokemon1, Pokemon pokemon2) {
-		this.pokemon1 = pokemon1;
-		this.pokemon2 = pokemon2;
-		this.typeCompatibility = getTypeCompatibility(pokemon1, pokemon2);
+	public GameLogic(Skills skill, Pokemon pokemon) {
+		this.pokemon = pokemon;
+		this.skill = skill;
+		this.typeCompatibility = getTypeCompatibility(skill, pokemon);
 		System.out.println(typeCompatibility);
 	}
 	
-	private double getTypeCompatibility(Pokemon pokemon1, Pokemon pokemon2) {
-		Enum<Type> type1 = pokemon1.getType();
-		Enum<Type> type2 = pokemon2.getType();
+	private int getTypeCompatibility(Skills skill, Pokemon pokemon) {
+		Enum<Type> type1 = skill.getType();
+		Enum<Type> type2 = pokemon.getType();
 		typeCompatibility = new TypeFactory(type1, type2).checkType();
 		System.out.println(type1);
 		return typeCompatibility;
 	}
 
-	public double calculateDamage(Pokemon pokemon1, Pokemon pokemon2) {
+	public int calculateDamage(Pokemon pokemon1, Pokemon pokemon2) {
 		damage = (pokemon1.getAttack() * pokemon1.getSkillDamage() * (level * 2 / 5 + 2 ) / pokemon2.getDefense() /50 + 2)
 				* typeCompatibility * random;
 		

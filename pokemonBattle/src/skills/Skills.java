@@ -6,7 +6,7 @@ import type.Type;
 
 public abstract class Skills implements Serializable{
 	String name;
-	Type type;
+	Enum<Type> type;
 	int damage;
 	
 	public Skills(String name, Type type, int damage) {
@@ -22,4 +22,5 @@ public abstract class Skills implements Serializable{
 	public String getName() {
 		return name;
 	}
+	public abstract Enum<Type> getType();
 }

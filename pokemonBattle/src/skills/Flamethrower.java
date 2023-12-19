@@ -13,4 +13,8 @@ public class Flamethrower extends Skills{
 		System.out.println("use Flamethrower " + name + type + damage);
 		return damage;
 	}
+	@Override
+	public Enum<Type> getType() {
+		return Type.FIRE;
+	}
 }

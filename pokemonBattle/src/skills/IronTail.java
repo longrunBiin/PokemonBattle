@@ -13,6 +13,10 @@ public class IronTail extends Skills{
 		return damage;
 		
 	}
+	@Override
+	public Enum<Type> getType() {
+		return Type.METAL;
+	}
 	
 }
 
