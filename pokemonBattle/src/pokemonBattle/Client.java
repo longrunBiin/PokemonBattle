@@ -149,11 +149,13 @@ public class Client {
     		enemyPokemon = message.split(":")[1].split(":")[0];
     		enemyHp = message.split("=")[1];
     		System.out.println("enemy HP= " + enemyHp);
+    		battleRoom.updateHP(myHp, enemyHp);
+
 
     	}else if (message.startsWith("MINE")) {
     		myHp = message.split(":")[1];
     		System.out.println("myHp = " + myHp);
-    		
+    		battleRoom.updateHP(myHp, enemyHp);
     	}
     	else {
         	// 다른 메시지 처리
