@@ -13,42 +13,27 @@ public class TypeFactory {
 		
 	}
 	
-	public int checkType() {
+	public double checkType() {
         switch((Type)type1) {
             case FIRE:
-                compatibility = new FireTypeCompatibility(type2).checkCompatibility(); return (int)compatibility;
+                compatibility = new FireTypeCompatibility(type2).checkCompatibility(); return compatibility;
             case NORMAL:
-            	compatibility = new NormalTypeCompatibility(type2).checkCompatibility(); return (int)compatibility;
+            	compatibility = new NormalTypeCompatibility(type2).checkCompatibility(); return compatibility;
             case ELECTRIC:
-            	compatibility = new ElectricTypeCompatibility(type2).checkCompatibility(); return (int)compatibility;
+            	compatibility = new ElectricTypeCompatibility(type2).checkCompatibility(); return compatibility;
             case FLYING:
-            	compatibility = new FlyingTypeCompatibility(type2).checkCompatibility(); return (int)compatibility;
+            	compatibility = new FlyingTypeCompatibility(type2).checkCompatibility(); return compatibility;
             case POISON:
-            	compatibility = new PoisonTypeCompatibility(type2).checkCompatibility(); return (int)compatibility;
+            	compatibility = new PoisonTypeCompatibility(type2).checkCompatibility(); return compatibility;
             case GHOST:
-            	compatibility = new GhostTypeCompatibility(type2).checkCompatibility(); return (int)compatibility;
+            	compatibility = new GhostTypeCompatibility(type2).checkCompatibility(); return compatibility;
             case PSYCHIC:
-            	compatibility = new PsychicTypeCompatibility(type2).checkCompatibility(); return (int)compatibility;
+            	compatibility = new PsychicTypeCompatibility(type2).checkCompatibility(); return compatibility;
             case ICE:
-            	compatibility = new IceTypeCompatibility(type2).checkCompatibility(); return (int)compatibility;
-            case DRAGON:
-            	compatibility = new FireTypeCompatibility(type2).checkCompatibility(); return (int)compatibility;
-            case DARK:
-            	compatibility = new FireTypeCompatibility(type2).checkCompatibility(); return (int)compatibility;
-            case ROCK:
-            	compatibility = new FireTypeCompatibility(type2).checkCompatibility(); return (int)compatibility;
+            	compatibility = new IceTypeCompatibility(type2).checkCompatibility(); return compatibility;
             case WATER:
-            	compatibility = new WaterTypeCompatibility(type2).checkCompatibility(); return (int)compatibility;
-            case GROUND:
-            	compatibility = new FireTypeCompatibility(type2).checkCompatibility(); return (int)compatibility;
-            case FIGHTING:
-            	compatibility = new FireTypeCompatibility(type2).checkCompatibility(); return (int)compatibility;
-            case BUG:
-            	compatibility = new FireTypeCompatibility(type2).checkCompatibility(); return (int)compatibility;
-            case METAL:
-            	compatibility = new FireTypeCompatibility(type2).checkCompatibility(); return (int)compatibility;
-            case GRASS:
-            	compatibility = new FireTypeCompatibility(type2).checkCompatibility(); return (int)compatibility;
+            	compatibility = new WaterTypeCompatibility(type2).checkCompatibility(); return compatibility;
+
             default:
             	return (int)compatibility;
         }

@@ -8,9 +8,9 @@ import type.TypeFactory;
 public class GameLogic {
 	Pokemon pokemon;
 	Skills skill;
-	int damage;
+	double damage;
 	int level = 10;
-	int typeCompatibility = 1;
+	double typeCompatibility = 1;
 	int random = (int) (((Math.random()*100)) * 100) / 100;
 	
 	public GameLogic(Skills skill, Pokemon pokemon) {
@@ -20,7 +20,7 @@ public class GameLogic {
 		System.out.println(typeCompatibility);
 	}
 	
-	private int getTypeCompatibility(Skills skill, Pokemon pokemon) {
+	private double getTypeCompatibility(Skills skill, Pokemon pokemon) {
 		Enum<Type> type1 = skill.getType();
 		Enum<Type> type2 = pokemon.getType();
 		typeCompatibility = new TypeFactory(type1, type2).checkType();
@@ -28,7 +28,7 @@ public class GameLogic {
 		return typeCompatibility;
 	}
 
-	public int calculateDamage(Pokemon pokemon1, Pokemon pokemon2) {
+	public double calculateDamage(Pokemon pokemon1, Pokemon pokemon2) {
 		damage = (pokemon1.getAttack() * pokemon1.getSkillDamage()/10 * (level / 5 + 2 ) / pokemon2.getDefense() /50 + 2)
 				* typeCompatibility * random/5;
 		

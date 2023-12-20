@@ -178,7 +178,7 @@ public class Client {
         Pokemon mine = mineToPokemon(myPokemon);
         Pokemon enemy = enemyToPokemon(enemyPokemon);
         GameLogic logic = new GameLogic(skills.get(skillIndex-1), enemy);
-        int damage = logic.calculateDamage(mine, enemy); // 데미지 계산
+        int damage = (int)logic.calculateDamage(mine, enemy); // 데미지 계산
         System.out.println(damage);
         sendDamageToServer(damage); // 서버에 데미지 전송
     }
